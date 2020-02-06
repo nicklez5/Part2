@@ -8,6 +8,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    public String current_id;
    public boolean field_value_on;
    public Scope current_scope;
+   public int current_offset;
    public static void main (String[] args){
       Goal holy_goal;
       try{
@@ -26,7 +27,8 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       sym_table = new Symbol_Table();
       current_id = "";
       field_value_on = false;
-
+      current_scope = new Scope();
+      current_offset = 0;
 
    }
    /**
@@ -66,8 +68,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f17 -> "}"
    */
    public void visit(MainClass n) {
-      Scope temp_scope = new Scope();
-      current_scope = temp_scope;
+
       n.f0.accept(this);
       visit(n.f1);
       sym_table.add_map_value(current_id,Constants.CLASS_TYPE);
@@ -78,6 +79,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f5.accept(this);
       sym_table.add_map_value(n.f6.toString(),Constants.METHOD_TYPE);
       current_scope.add_methods(n.f6.toString());
+
       sym_table.add_scope(current_scope);
       n.f7.accept(this);
       n.f8.accept(this);
@@ -120,8 +122,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f5 -> "}"
    */
    public void visit(ClassDeclaration n) {
-      Scope temp_scope = new Scope();
-      current_scope = temp_scope;
+      current_scope = new Scope();
       String class_name = n.f1.f0.toString();
       current_scope.add_name(class_name);
       sym_table.add_map_value(class_name,Constants.CLASS_TYPE);
@@ -132,6 +133,8 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
          VarDeclaration temp_var = (VarDeclaration)_itr.next();
          visit(temp_var);
          current_scope.add_fields(current_id);
+         current_scope.add_class_record(current_id,current_offset);
+         current_offset++;
       }
       field_value_on = false;
       list_nodes = n.f4.nodes;
@@ -154,8 +157,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f7 -> "}"
    */
    public void visit(ClassExtendsDeclaration n) {
-      Scope temp_scope = new Scope();
-      current_scope = temp_scope;
+      current_scope = new Scope();
       n.f0.accept(this);
       visit(n.f1);
       current_scope.add_name(current_id);
@@ -193,6 +195,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f2.accept(this);
       if(field_value_on){
          sym_table.add_map_value(current_id,Constants.FIELD_TYPE);
+         current_scope.add_class_record()
       }else{
          sym_table.add_map_value(current_id,Constants.LOCAL_TYPE);
       }
@@ -219,6 +222,8 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       visit(n.f2);
       sym_table.add_map_value(current_id,Constants.METHOD_TYPE);
       current_scope.add_methods(current_id);
+      current_scope.add_v_table(current_id,current_offset);
+      current_offset++;
       n.f3.accept(this);
 
       FormalParameterList temp_list = (FormalParameterList)n.f4.node;
