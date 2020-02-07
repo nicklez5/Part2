@@ -5,6 +5,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
    public Symbol_Table_Parser sym_parser;
    public Print_Me random_print;
    public int current_random_number;
+   public Symbol_Table main_table;
    public Vector<Node> l_nodes
    public static void main(String[] args){
 
@@ -14,9 +15,11 @@ public class J2V extends GJDepthFirst<String, Integer> {
       random_print = new Print_Me();
       current_random_number = 0;
       sym_parser = new Symbol_Table_Parser();
+      main_table = new Symbol_Table();
    }
    public J2V(Symbol_Table_Parser xyz1){
       sym_parser = xyz1;
+      main_table = sym_parser.sym_table;
    }
    /**
    * f0 -> MainClass()
@@ -61,7 +64,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
       String class_name = "Main";
       random_print.set_code("func " + class_name + "()");
       random_print.print_me();
-      random_print.set_code("t." + current_random_number + " = HeapAllocZ(4)" );
+      //random_print.set_code("t." + current_random_number + " = HeapAllocZ(4)" );
 
       n.f1.accept(this, argu);
 
@@ -71,7 +74,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
          VarDeclaration temp_x = (VarDeclaration)_itr.next();
          visit(temp_x,1);
       }
-      
+
       l_nodes = n.f15.nodes;
       _itr = l_nodes.iterator();
       while(_itr.hasNext()){
@@ -101,9 +104,14 @@ public class J2V extends GJDepthFirst<String, Integer> {
    * f5 -> "}"
    */
    public String visit(ClassDeclaration n, int argu) {
+       //Translate v-table into a constant data segment
       String _ret=null;
-      n.f0.accept(this, argu);
-      n.f1.accept(this, argu);
+      String temp_class_name = n.f1.f0.toString();
+      if(main_table.check_for_scope(temp_class_name)){
+          Scope da_scope = main_table.return_the_scope(temp_class_name);
+          da_scope.v_table_print_const();
+
+      }
       n.f2.accept(this, argu);
       n.f3.accept(this, argu);
       n.f4.accept(this, argu);
@@ -265,8 +273,20 @@ public class J2V extends GJDepthFirst<String, Integer> {
    *       | PrintStatement()
    */
    public String visit(Statement n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
+      String _ret = "";
+      if(n.f0.which == 0){
+          visit((Block)n.f0.choice,1);
+      }else if(n.f0.which == 1){
+          visit((AssignmentStatement)n.f0.choice,1);
+      }else if(n.f0.which == 2){
+          visit((ArrayAssignmentStatement)n.f0.choice,1);
+      }else if(n.f0.which == 3){
+          visit((IfStatement)n.f0.choice,1);
+      }else if(n.f0.which == 4){
+          visit((WhileStatement)n.f0.choice,1);
+      }else if(n.f0.which == 5){
+          visit((PrintStatement)n.f0.choice,1)
+      }
       return _ret;
    }
 
@@ -365,12 +385,10 @@ public class J2V extends GJDepthFirst<String, Integer> {
    * f4 -> ";"
    */
    public String visit(PrintStatement n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
-      n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
-      n.f3.accept(this, argu);
-      n.f4.accept(this, argu);
+      String _ret = "";
+
+      String output_code = visit(n.f2,1);
+
       return _ret;
    }
 
@@ -386,8 +404,27 @@ public class J2V extends GJDepthFirst<String, Integer> {
    *       | PrimaryExpression()
    */
    public String visit(Expression n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
+      String _ret = "";
+
+      if(n.f0.which == 0){
+          _ret = visit((AndExpression)n.f0.choice,1);
+      }else if(n.f0.which == 1){
+          _ret = visit((CompareExpression)n.f0.choice,1);
+      }else if(n.f0.which == 2){
+          _ret = visit((PlusExpression)n.f0.choice,1);
+      }else if(n.f0.which == 3){
+          _ret = visit((MinusExpression)n.f0.choice,1);
+      }else if(n.f0.which == 4){
+          _ret = visit((TimesExpression)n.f0.choice,1);
+      }else if(n.f0.which == 5){
+          _ret = visit((ArrayLookup)n.f0.choice,1);
+      }else if(n.f0.which == 6){
+          _ret = visit((ArrayLength)n.f0.choice,1);
+      }else if(n.f0.which == 7){
+          _ret = visit((MessageSend)n.f0.choice,1);
+      }else if(n.f0.which == 8){
+          _ret = visit((PrimaryExpression)n.f0.choice,1);
+      }
       return _ret;
    }
 
@@ -537,8 +574,26 @@ public class J2V extends GJDepthFirst<String, Integer> {
    *       | BracketExpression()
    */
    public String visit(PrimaryExpression n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
+      String _ret = "";
+      if(n.f0.which == 0){
+          _ret = visit((IntegerLiteral)n.f0.choice,1);
+      }else if(n.f0.which == 1){
+          _ret = visit((TrueLiteral)n.f0.choice,1);
+      }else if(n.f0.which == 2){
+          _ret = visit((FalseLiteral)n.f0.choice,1);
+      }else if(n.f0.which == 3){
+          _ret = visit((Identifier)n.f0.choice,1);
+      }else if(n.f0.which == 4){
+          _ret = visit((ThisExpression)n.f0.choice,1);
+      }else if(n.f0.which == 5){
+          _ret = visit((ArrayAllocationExpression)n.f0.choice,1);
+      }else if(n.f0.which == 6){
+          _ret = visit((AllocationExpression)n.f0.choice,1);
+      }else if(n.f0.which == 7){
+          _ret = visit((NotExpression)n.f0.choice,1);
+      }else if(n.f0.which == 8){
+          _ret = visit((BracketExpression)n.f0.choice,1);
+      }
       return _ret;
    }
 
