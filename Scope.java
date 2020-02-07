@@ -5,12 +5,14 @@ public class Scope{
    public Vector<String> fields;
    public Vector<String> methods;
    public Class_Record class_record;
+   public Class_Record super_class_record;
    public V_Table v_table;
    public Scope(){
       name = "";
       fields = new Vector<String>();
       methods = new Vector<String>();
       class_record = new Class_Record();
+      super_class_record = new Class_Record();
       v_table = new V_Table();
    }
    public void print_scope_name(){
@@ -26,16 +28,24 @@ public class Scope{
       methods.add(temp_methods);
    }
    public void add_class_record(String id_name, int offset){
+      System.out.println("Adding class_record name: " + id_name);
       class_record.add_offset(id_name,offset);
    }
    public void add_v_table(String id_name, int offset){
       v_table.add_offset(id_name,offset);
    }
-   
+   public void set_super_class(Class_Record xyz){
+      super_class_record = xyz;
+   }
+   public void set_super_vtable(V_Table xyz){
+      v_table = xyz;
+   }
    public void print_scope(){
       System.out.println("Class Name: " + name);
       System.out.println("Field Name: " + fields);
       System.out.println("Method Name: " + methods);
+      class_record.print_class_record();
+      v_table.print_vtable();
    }
 
 }

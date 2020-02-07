@@ -125,6 +125,8 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       current_scope = new Scope();
       String class_name = n.f1.f0.toString();
       current_scope.add_name(class_name);
+      current_scope.add_class_record("this",current_offset);
+      current_offset++;
       sym_table.add_map_value(class_name,Constants.CLASS_TYPE);
       Vector<Node> list_nodes = n.f3.nodes;
       Iterator _itr = list_nodes.iterator();
@@ -163,7 +165,13 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       current_scope.add_name(current_id);
       sym_table.add_map_value(current_id,Constants.CLASS_TYPE);
       n.f2.accept(this);
-      n.f3.accept(this);
+      String super_class_name = n.f3.f0.toString();
+      if(sym_table.check_for_scope(super_class_name)){
+         Scope xyz_scope = sym_table.return_the_scope(super_class_name);
+         //Copying vtable and class record of the super class
+         current_scope.set_super_class(xyz_scope.class_record);
+         current_scope.set_super_vtable(xyz_scope.v_table);
+      }
       n.f4.accept(this);
       Vector<Node> list_class = n.f5.nodes;
       Iterator _itr = list_class.iterator();
@@ -195,7 +203,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f2.accept(this);
       if(field_value_on){
          sym_table.add_map_value(current_id,Constants.FIELD_TYPE);
-         current_scope.add_class_record()
+
       }else{
          sym_table.add_map_value(current_id,Constants.LOCAL_TYPE);
       }

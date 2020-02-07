@@ -3,11 +3,16 @@ import syntaxtree.*;
 import visitor.*;
 public class J2V extends GJDepthFirst<String, Integer> {
    public Symbol_Table_Parser sym_parser;
+   public Print_Me random_print;
+   public int current_random_number;
+   public Vector<Node> l_nodes
    public static void main(String[] args){
 
    }
 
    public J2V(){
+      random_print = new Print_Me();
+      current_random_number = 0;
       sym_parser = new Symbol_Table_Parser();
    }
    public J2V(Symbol_Table_Parser xyz1){
@@ -19,9 +24,14 @@ public class J2V extends GJDepthFirst<String, Integer> {
    * f2 -> <EOF>
    */
    public String visit(Goal n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
-      n.f1.accept(this, argu);
+      String _ret = "";
+      visit(n.f0,1);
+      l_nodes = n.f1.nodes;
+      Iterator l_itr = l_nodes.iterator();
+      while(l_itr.hasNext()){
+         TypeDeclaration l_type = (TypeDeclaration)l_itr.next();
+         visit(l_type,1);
+      }
       n.f2.accept(this, argu);
       return _ret;
    }
@@ -47,25 +57,28 @@ public class J2V extends GJDepthFirst<String, Integer> {
    * f17 -> "}"
    */
    public String visit(MainClass n, int argu) {
-      String _ret=null;
-      n.f0.accept(this, argu);
+      String _ret;
+      String class_name = "Main";
+      random_print.set_code("func " + class_name + "()");
+      random_print.print_me();
+      random_print.set_code("t." + current_random_number + " = HeapAllocZ(4)" );
+
       n.f1.accept(this, argu);
-      n.f2.accept(this, argu);
-      n.f3.accept(this, argu);
-      n.f4.accept(this, argu);
-      n.f5.accept(this, argu);
-      n.f6.accept(this, argu);
-      n.f7.accept(this, argu);
-      n.f8.accept(this, argu);
-      n.f9.accept(this, argu);
-      n.f10.accept(this, argu);
-      n.f11.accept(this, argu);
-      n.f12.accept(this, argu);
-      n.f13.accept(this, argu);
-      n.f14.accept(this, argu);
-      n.f15.accept(this, argu);
-      n.f16.accept(this, argu);
-      n.f17.accept(this, argu);
+
+      l_nodes = n.f14.nodes;
+      Iterator _itr = l_nodes.iterator();
+      while(_itr.hasNext()){
+         VarDeclaration temp_x = (VarDeclaration)_itr.next();
+         visit(temp_x,1);
+      }
+      
+      l_nodes = n.f15.nodes;
+      _itr = l_nodes.iterator();
+      while(_itr.hasNext()){
+         Statement temp_s = (Statement)_itr.next();
+         visit(temp_s,1);
+      }
+
       return _ret;
    }
 
