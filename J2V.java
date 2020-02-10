@@ -215,6 +215,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         while(_itr.hasNext()){
             Statement temp_var = (Statement)_itr.next();
             visit(temp_var,1);
+            current_label_no++;
 
         }
 
@@ -377,8 +378,9 @@ public class J2V extends GJDepthFirst<String, Integer> {
                 //tmp1 = [tmp1 + 8]
                 random_print.set_code("tmp" + current_label_no + " = [tmp" + current_label_no + " + " + operand_offset + "]");
                 random_print.print_me();
-                right_operand_value = visit(n.f2,1);
-
+                visit(n.f2,1);
+                right_operand_value = sym_stack.pop();
+                //tmp1
                 random_print.set_code("tmp" + current_label_no + " = " + right_operand_value);
                 random_print.print_me();
                 current_label_no++;
@@ -386,7 +388,8 @@ public class J2V extends GJDepthFirst<String, Integer> {
             }
         //Not a field
         }else{
-            right_operand_value = visit(n.f2,1);
+            visit(n.f2,1);
+            right_operand_value = sym_stack.pop();
             random_print.set_code("tmp" + current_label_no + " = " + right_operand_value);
             random_print.print_me();
         }
@@ -408,12 +411,19 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String _ret=null;
         String array_id = visit(n.f0,1);
         String array_index = visit(n.f2,1);
+        //Does the sym table have the array_id mapped
         if(main_table.does_it_contain(array_id)){
+            //Is the array id a field.
             if(main_table.field_check(array_id)){
                 //random_print.set_code("tmp" + current_label_no + " = " + array_index);
                 Class_Record tmp_record = current_scope.class_record;
+                //If the Class record contains the id.
                 if(tmp_record.check_field_found(array_id)){
-
+                    random_print.set_code("t." + current_label_no + " = [this]");
+                    random_print.print_me();
+                    random_print.set_code("ok" + current_label_no + " = LtS(" + array_index + ", t." + current_label_no + ")");
+                    random_print.print_me();
+                    random_print.set_code("if ok" + current_label_no + " goto :l'");
                 }
             }
         }
