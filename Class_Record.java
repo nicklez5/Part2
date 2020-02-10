@@ -19,4 +19,20 @@ public class Class_Record{
           System.out.println(k + ":" + v);
       }
    }
+   public int return_offset(String field_name){
+       int _offset = 0;
+       _offset = record_map.get(field_name);
+       return _offset;
+   }
+   public boolean check_field_found(String field_name){
+       boolean is_found = false;
+       if(record_map.containsKey(field_name)){
+           is_found = true;
+       }
+       return is_found;
+   }
+   public int record_size(){
+       int record_size = record_map.size();
+       return record_size;
+   }
 }

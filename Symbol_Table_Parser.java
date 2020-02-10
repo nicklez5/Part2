@@ -9,6 +9,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    public boolean field_value_on;
    public Scope current_scope;
    public int current_offset;
+   public String current_value;
    public static void main (String[] args){
       Goal holy_goal;
       try{
@@ -29,7 +30,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       field_value_on = false;
       current_scope = new Scope();
       current_offset = 0;
-
+      current_value = "";
    }
    /**
    * f0 -> MainClass()
@@ -198,7 +199,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f2 -> ";"
    */
    public void visit(VarDeclaration n) {
-      n.f0.accept(this);
+      visit(n.f0);
       visit(n.f1);
       n.f2.accept(this);
       if(field_value_on){
@@ -246,6 +247,12 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       while(_itr.hasNext()){
          VarDeclaration temp_var = (VarDeclaration)_itr.next();
          visit(temp_var);
+      }
+      list_nodes = n.f8.nodes;
+      _itr = list_nodes.iterator();
+      while(_itr.hasNext()){
+          Statement temp_statement = (Statement)_itr.next();
+          visit(temp_statement);
       }
       n.f9.accept(this);
       n.f10.accept(this);
@@ -330,7 +337,20 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    *       | PrintStatement()
    */
    public void visit(Statement n) {
-      n.f0.accept(this);
+       if(n.f0.which == 0){
+           visit((Block)n.f0.choice);
+       }else if(n.f0.which == 1){
+           visit((AssignmentStatement)n.f0.choice);
+       }else if(n.f0.which == 2){
+           visit((ArrayAssignmentStatement)n.f0.choice);
+       }else if(n.f0.which == 3){
+           visit((IfStatement)n.f0.choice);
+       }else if(n.f0.which == 4){
+           visit((WhileStatement)n.f0.choice);
+       }else if(n.f0.which == 5){
+           visit((PrintStatement)n.f0.choice);
+       }
+
    }
 
    /**
@@ -339,6 +359,12 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f2 -> "}"
    */
    public void visit(Block n) {
+       Vector<Node> list_nodes = n.f1.nodes;
+       Iterator _itr = list_nodes.iterator();
+       while(_itr.hasNext()){
+           Statement temp_statement = (Statement)_itr.next();
+           visit(temp_statement);
+       }
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
@@ -351,10 +377,12 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f3 -> ";"
    */
    public void visit(AssignmentStatement n) {
-      n.f0.accept(this);
-      n.f1.accept(this);
-      n.f2.accept(this);
-      n.f3.accept(this);
+       n.f0.accept(this);
+       n.f1.accept(this);
+       /*
+       visit(n.f0);
+       visit(n.f2);
+       */
    }
 
    /**
@@ -390,9 +418,9 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f1.accept(this);
       n.f2.accept(this);
       n.f3.accept(this);
-      n.f4.accept(this);
+      visit(n.f4);
       n.f5.accept(this);
-      n.f6.accept(this);
+      visit(n.f6);
    }
 
    /**
@@ -407,7 +435,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f1.accept(this);
       n.f2.accept(this);
       n.f3.accept(this);
-      n.f4.accept(this);
+      visit(n.f4);
    }
 
    /**
@@ -437,7 +465,26 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    *       | PrimaryExpression()
    */
    public void visit(Expression n) {
-      n.f0.accept(this);
+      if(n.f0.which == 0){
+          visit((AndExpression)n.f0.choice);
+      }else if(n.f0.which == 1){
+          visit((CompareExpression)n.f0.choice);
+      }else if(n.f0.which == 2){
+          visit((PlusExpression)n.f0.choice);
+      }else if(n.f0.which == 3){
+          visit((MinusExpression)n.f0.choice);
+      }else if(n.f0.which == 4){
+          visit((TimesExpression)n.f0.choice);
+      }else if(n.f0.which == 5){
+          visit((ArrayLookup)n.f0.choice);
+      }else if(n.f0.which == 6){
+          visit((ArrayLength)n.f0.choice);
+      }else if(n.f0.which == 7){
+          visit((MessageSend)n.f0.choice);
+      }else if(n.f0.which == 8){
+          visit((PrimaryExpression)n.f0.choice);
+      }
+
    }
 
    /**
@@ -566,14 +613,33 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    *       | BracketExpression()
    */
    public void visit(PrimaryExpression n) {
-      n.f0.accept(this);
+      if(n.f0.which == 0){
+          visit((IntegerLiteral)n.f0.choice);
+      }else if(n.f0.which == 1){
+          visit((TrueLiteral)n.f0.choice);
+      }else if(n.f0.which == 2){
+          visit((FalseLiteral)n.f0.choice);
+      }else if(n.f0.which == 3){
+          visit((Identifier)n.f0.choice);
+      }else if(n.f0.which == 4){
+          visit((ThisExpression)n.f0.choice);
+      }else if(n.f0.which == 5){
+          visit((ArrayAllocationExpression)n.f0.choice);
+      }else if(n.f0.which == 6){
+          visit((AllocationExpression)n.f0.choice);
+      }else if(n.f0.which == 7){
+          visit((NotExpression)n.f0.choice);
+      }else if(n.f0.which == 8){
+          visit((BracketExpression)n.f0.choice);
+      }
+
    }
 
    /**
    * f0 -> <INTEGER_LITERAL>
    */
    public void visit(IntegerLiteral n) {
-      n.f0.accept(this);
+       current_value = n.f0.toString();
    }
 
    /**
@@ -616,7 +682,16 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       n.f0.accept(this);
       n.f1.accept(this);
       n.f2.accept(this);
-      n.f3.accept(this);
+
+      /*
+      visit(n.f3);
+      int result = Integer.parseInt(current_value);
+      for(int i = 1; i < result ; i++){
+          current_scope.add_class_record(current_id,current_offset);
+          current_offset++;
+      }
+      */
+
       n.f4.accept(this);
    }
 

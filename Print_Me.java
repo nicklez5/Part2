@@ -13,5 +13,10 @@ public class Print_Me{
    public void set_code(String xyz){
       intermediate_code = xyz;
    }
-
+   public void increment_tab(){
+       current_tab_space += 2;
+   }
+   public void decrement_tab(){
+       current_tab_space -= 2;
+   }
 }

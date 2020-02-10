@@ -40,6 +40,7 @@ public class Scope{
    public void set_super_vtable(V_Table xyz){
       v_table = xyz;
    }
+
    public void print_scope(){
       System.out.println("Class Name: " + name);
       System.out.println("Field Name: " + fields);
@@ -47,14 +48,5 @@ public class Scope{
       class_record.print_class_record();
       v_table.print_vtable();
    }
-   public void v_table_print_const(){
-       System.out.println("const vmt_" + name);
-       Print_Me temp_xyz = new Print_Me();
-       for(int i = 0 ;i < methods.size() ;i++){
-           temp_xyz.current_tab_space = 2;
-           String code_value = String.format(":" + name + "." + methods.elementAt(i));
-           temp_xyz.set_code(code_value);
-           temp_xyz.print_me();
-       }
-   }
+
 }
