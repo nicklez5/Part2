@@ -10,6 +10,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public Scope current_scope;
     public Stack<String> sym_stack;
     public Helper_Function xyz;
+    public Map<String, String> id_memoryaddr;
     public static void main(String[] args){
 
     }
@@ -22,6 +23,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         current_scope = new Scope();
         xyz = new Helper_Function();
         sym_stack = new Stack<String>();
+        id_memoryaddr = new Map<String,String>();
     }
     public J2V(Symbol_Table_Parser xyz1){
         sym_parser = xyz1;
@@ -30,9 +32,35 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print = new Print_Me();
         current_label_no = 0;
         xyz = new Helper_Function(main_table);
+        id_memoryaddr = new Map<String,String>();
         sym_stack = new Stack<String>();
     }
-
+    public void print_out_of_bounds(int random_array_index){
+        random_print.set_code("t." + current_label_no + " = [this]");
+        random_print.print_me();
+        random_print.set_code("ok" + current_label_no + " = LtS(" + array_index + ", t." + current_label_no + ")");
+        random_print.print_me();
+        random_print.set_code("if ok" + current_label_no + " goto :l" + current_label_no + "\`");
+        random_print.print_me();
+        random_print.set_code("Error(\"Array index out of bounds\")";
+        random_print.print_me();
+        random_print.decrement_tab();
+        random_print.decrement_tab();
+        random_print.set_code("l" + current_label_no + "\`: ok = LtS(-1, " + random_array_index + ")" );
+        random_print.print_me();
+        random_print.increment_tab();
+        random_print.increment_tab();
+        random_print.set_code("if ok" + current_label_no + " goto :l" + current_label_no);
+        random_print.print_me();
+        random_print.set_code("Error(\"Array index out of bounds\")");
+        random_print.print_me();
+        random_print.decrement_tab();
+        random_print.decrement_tab();
+        random_print.set_code("l" + current_label_no + ": t." + current_label_no++ + " = MulS(" + array_index + " 4)");
+        random_print.print_me();
+        String right_operand = String.format("t." + current_label_no);
+        random_print.set_code("t." + current_label_no++ + " = Add()")
+    }
     /**
     * f0 -> MainClass()
     * f1 -> ( TypeDeclaration() )*
@@ -361,6 +389,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(AssignmentStatement n, int argu) {
         String _ret = "FALSE";
         String operand_id = visit(n.f0,1);
+        sym_stack.push(operand_id);
         String right_operand_value = "";
         int operand_offset_index = 0;
         int operand_offset = 0;
@@ -368,7 +397,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
 
         //Check if the identifier is a field
         if(main_table.field_check(operand_id)){
-            random_print.set_code("tmp" + current_label_no + " = [this]");
+            random_print.set_code("t." + current_label_no + " = [this]");
             random_print.print_me();
             Class_Record tmp_record = current_scope.class_record;
             //If you found the field in the class record.
@@ -376,12 +405,12 @@ public class J2V extends GJDepthFirst<String, Integer> {
                 operand_offset_index = tmp_record.return_offset(operand_id);
                 operand_offset = operand_offset_index * 4 + 4;
                 //tmp1 = [tmp1 + 8]
-                random_print.set_code("tmp" + current_label_no + " = [tmp" + current_label_no + " + " + operand_offset + "]");
+                random_print.set_code("t." + current_label_no + " = [t." + current_label_no + " + " + operand_offset + "]");
                 random_print.print_me();
                 visit(n.f2,1);
                 right_operand_value = sym_stack.pop();
                 //tmp1
-                random_print.set_code("tmp" + current_label_no + " = " + right_operand_value);
+                random_print.set_code("t." + current_label_no + " = " + right_operand_value);
                 random_print.print_me();
                 current_label_no++;
 
@@ -424,6 +453,10 @@ public class J2V extends GJDepthFirst<String, Integer> {
                     random_print.set_code("ok" + current_label_no + " = LtS(" + array_index + ", t." + current_label_no + ")");
                     random_print.print_me();
                     random_print.set_code("if ok" + current_label_no + " goto :l'");
+                    random_print.print_me();
+                    random_print.set_code("Error(\"Array index out of bounds\")";
+                    random_print.print_me();
+
                 }
             }
         }
@@ -778,11 +811,11 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(ThisExpression n, int argu) {
         String _ret = "";
         current_label_no++;
-        _ret = String.format("tmp" + current_label_no + " = [this]");
+        _ret = String.format("t." + current_label_no + " = [this]");
         random_print.set_code(_ret);
         random_print.print_me();
         n.f0.accept(this, argu);
-        String _value = String.format("tmp" + current_label_no);
+        String _value = String.format("t." + current_label_no);
         sym_stack.push(_value);
         return _value;
     }
@@ -799,7 +832,20 @@ public class J2V extends GJDepthFirst<String, Integer> {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
         n.f2.accept(this, argu);
-        n.f3.accept(this, argu);
+        String array_size = visit(n.f3,1);
+        random_print.set_code("t." + current_label_no + " = " + array_size);
+        random_print.print_me();
+        random_print.set_code("t." + current_label_no + " = MulS(t." + current_label_no + " 4)" );
+        random_print.print_me();
+        random_print.set_code("t." + current_label_no + " = AddS(t." + current_label_no + " 4)" );
+        random_print.print_me();
+        String receiver_obj = "t." + current_label_no;
+        random_print.set_code("t." + current_label_no++ + " = HeapAllocZ(" + receiver_obj + ")" );
+        random_print.print_me();
+        if(!sym_stack.isEmpty()){
+            id_memoryaddr.put(sym_stack.pop(), "t." + current_label_no);
+        }
+        _ret = "t." + current_label_no;
         n.f4.accept(this, argu);
         return _ret;
     }
@@ -816,6 +862,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String current_receiver = "";
         n.f0.accept(this, argu);
         class_id = visit(n.f1,1);
+
         if(main_table.check_for_scope(class_id)){
             Scope temp_random_scope = main_table.return_the_scope(class_id);
             current_scope = temp_random_scope;
@@ -823,6 +870,9 @@ public class J2V extends GJDepthFirst<String, Integer> {
             int result = 4 * get_record_size + 4;
             random_print.set_code("t." + current_label_no + " = HeapAllocZ(" + result + ")");
             random_print.print_me();
+            if(!sym_stack.isEmpty()){
+                id_memoryaddr.put(sym_stack.pop(),"t." + current_label_no);
+            }
             random_print.set_code("[t." + current_label_no + "] = :" +  temp_random_scope.v_table.name_vtable);
             random_print.print_me();
             current_receiver = String.format("t." + current_label_no);
