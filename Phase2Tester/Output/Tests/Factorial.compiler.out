@@ -1,0 +1,27 @@
+   const vmt_Fac
+      :Fac.ComputeFac
+
+   func Main()
+      t.0 = HeapAllocZ(4)
+      [t.0] = :vmt_Fac
+      if t.0 goto :null0
+      Error("null pointer")
+      null0:
+      t.1 = [t.0]
+      t.1 = [t.1+0]
+      t.2 = call t.1(t.0 10)
+      PrintIntS(t.2)
+      ret
+
+   func Fac.ComputeFac(this num)
+      t.2 = LtS(num 1)
+      t.2 = Eq(t.2 1)
+      if0 t.2 goto :if1_else
+         num_aux = 1
+         goto :if1_end
+      if1_else:
+         t.3 = MulS(num null)
+         num_aux = t.3
+         if1_end:
+         ret num_aux
+

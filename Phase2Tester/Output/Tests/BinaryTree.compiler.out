@@ -1,0 +1,365 @@
+   const vmt_BT
+      :BT.Start
+   const vmt_Tree
+      :Tree.Init
+      :Tree.SetRight
+      :Tree.SetLeft
+      :Tree.GetRight
+      :Tree.GetLeft
+      :Tree.GetKey
+      :Tree.SetKey
+      :Tree.GetHas_Right
+      :Tree.GetHas_Left
+      :Tree.SetHas_Left
+      :Tree.SetHas_Right
+      :Tree.Compare
+      :Tree.Insert
+      :Tree.Delete
+      :Tree.Remove
+      :Tree.RemoveRight
+      :Tree.RemoveLeft
+      :Tree.Search
+      :Tree.Print
+      :Tree.RecPrint
+
+   func Main()
+      t.0 = HeapAllocZ(4)
+      [t.0] = :vmt_BT
+      if t.0 goto :null0
+      Error("null pointer")
+      null0:
+      t.1 = [t.0]
+      t.1 = [t.1+0]
+      t.2 = call t.1(t.0)
+      PrintIntS(t.2)
+      ret
+
+   func BT.Start(this)
+      t.3 = HeapAllocZ(28)
+      [t.3] = :vmt_Tree
+      root = t.3
+      if root goto :null1
+      Error("null pointer")
+      null1:
+      t.4 = [root]
+      t.4 = [t.4+28]
+      t.5 = call t.4(this 16)
+      ntb = t.5
+      if root goto :null2
+      Error("null pointer")
+      null2:
+      t.6 = [root]
+      t.6 = [t.6+100]
+      t.7 = call t.6(this)
+      ntb = t.7
+      PrintIntS(100000000)
+      if root goto :null3
+      Error("null pointer")
+      null3:
+      t.8 = [root]
+      t.8 = [t.8+76]
+      t.9 = call t.8(this 8)
+      ntb = t.9
+      if root goto :null4
+      Error("null pointer")
+      null4:
+      t.10 = [root]
+      t.10 = [t.10+100]
+      t.11 = call t.10(this)
+      ntb = t.11
+      if root goto :null5
+      Error("null pointer")
+      null5:
+      t.12 = [root]
+      t.12 = [t.12+76]
+      t.13 = call t.12(this 24)
+      ntb = t.13
+      if root goto :null6
+      Error("null pointer")
+      null6:
+      t.14 = [root]
+      t.14 = [t.14+76]
+      t.15 = call t.14(this 4)
+      ntb = t.15
+      if root goto :null7
+      Error("null pointer")
+      null7:
+      t.16 = [root]
+      t.16 = [t.16+76]
+      t.17 = call t.16(this 12)
+      ntb = t.17
+      if root goto :null8
+      Error("null pointer")
+      null8:
+      t.18 = [root]
+      t.18 = [t.18+76]
+      t.19 = call t.18(this 20)
+      ntb = t.19
+      if root goto :null9
+      Error("null pointer")
+      null9:
+      t.20 = [root]
+      t.20 = [t.20+76]
+      t.21 = call t.20(this 28)
+      ntb = t.21
+      if root goto :null10
+      Error("null pointer")
+      null10:
+      t.22 = [root]
+      t.22 = [t.22+76]
+      t.23 = call t.22(this 14)
+      ntb = t.23
+      if root goto :null11
+      Error("null pointer")
+      null11:
+      t.24 = [root]
+      t.24 = [t.24+100]
+      t.25 = call t.24(this)
+      ntb = t.25
+      if root goto :null12
+      Error("null pointer")
+      null12:
+      t.26 = [root]
+      t.26 = [t.26+96]
+      t.27 = call t.26(this 24)
+      PrintIntS(t.27)
+      if root goto :null13
+      Error("null pointer")
+      null13:
+      t.28 = [root]
+      t.28 = [t.28+96]
+      t.29 = call t.28(this 12)
+      PrintIntS(t.29)
+      if root goto :null14
+      Error("null pointer")
+      null14:
+      t.30 = [root]
+      t.30 = [t.30+96]
+      t.31 = call t.30(this 16)
+      PrintIntS(t.31)
+      if root goto :null15
+      Error("null pointer")
+      null15:
+      t.32 = [root]
+      t.32 = [t.32+96]
+      t.33 = call t.32(this 50)
+      PrintIntS(t.33)
+      if root goto :null16
+      Error("null pointer")
+      null16:
+      t.34 = [root]
+      t.34 = [t.34+96]
+      t.35 = call t.34(this 12)
+      PrintIntS(t.35)
+      if root goto :null17
+      Error("null pointer")
+      null17:
+      t.36 = [root]
+      t.36 = [t.36+80]
+      t.37 = call t.36(this 12)
+      ntb = t.37
+      if root goto :null18
+      Error("null pointer")
+      null18:
+      t.38 = [root]
+      t.38 = [t.38+100]
+      t.39 = call t.38(this)
+      ntb = t.39
+      if root goto :null19
+      Error("null pointer")
+      null19:
+      t.40 = [root]
+      t.40 = [t.40+96]
+      t.41 = call t.40(this 12)
+      PrintIntS(t.41)
+      ret 0
+
+   func Tree.Init(this v_key)
+      t.41 = [this]
+      t.41 = [t.41 + 16]
+      t.41 = v_key
+      t.41 = [this]
+      t.41 = [t.41 + 20]
+      t.41 = 0
+      t.41 = [this]
+      t.41 = [t.41 + 24]
+      t.41 = 0
+      ret 1
+
+   func Tree.SetRight(this rn)
+      t.41 = [this]
+      t.41 = [t.41 + 12]
+      t.41 = rn
+      ret 1
+
+   func Tree.SetLeft(this ln)
+      t.41 = [this]
+      t.41 = [t.41 + 8]
+      t.41 = ln
+      ret 1
+
+   func Tree.GetRight(this)
+      t.41 = right
+      ret t.41
+
+   func Tree.GetLeft(this)
+      t.41 = left
+      ret t.41
+
+   func Tree.GetKey(this)
+      t.41 = key
+      ret t.41
+
+   func Tree.SetKey(this v_key)
+      t.41 = [this]
+      t.41 = [t.41 + 16]
+      t.41 = v_key
+      ret 1
+
+   func Tree.GetHas_Right(this)
+      t.41 = has_right
+      ret t.41
+
+   func Tree.GetHas_Left(this)
+      t.41 = has_left
+      ret t.41
+
+   func Tree.SetHas_Left(this val)
+      t.41 = [this]
+      t.41 = [t.41 + 20]
+      t.41 = val
+      ret 1
+
+   func Tree.SetHas_Right(this val)
+      t.41 = [this]
+      t.41 = [t.41 + 24]
+      t.41 = val
+      ret 1
+
+   func Tree.Compare(this num1 num2)
+      ntb = 0
+      t.42 = Add(num2 1)
+      nti = t.42
+      t.42 = LtS(num1 num2)
+      t.42 = Eq(t.42 1)
+      if0 t.42 goto :if20_else
+         ntb = 0
+         goto :if20_end
+      if20_else:
+         t.43 = Eq(null 0)
+         if0 t.43 goto :if20_else
+            t.42 = 0
+            goto :if20_end
+         if20_else:
+            t.42 = 1
+         if20_end:
+         t.43 = Eq(t.42 1)
+         if0 t.43 goto :if21_else
+            ntb = 0
+            goto :if21_end
+         if21_else:
+            ntb = 1
+            if21_end:
+            if22_end:
+            ret ntb
+
+         func Tree.Insert(this v_key)
+            t.44 = HeapAllocZ(28)
+            [t.44] = :vmt_Tree
+            new_node = t.44
+            if new_node goto :null23
+            Error("null pointer")
+            null23:
+            t.45 = [new_node]
+            t.45 = [t.45+28]
+            t.46 = call t.45(this v_key)
+            ntb = t.46
+            current_node = this
+            cont = 1
+            t.46 = Eq(cont 1)
+            if0 t.46 goto :if24_end
+               if current_node goto :null24
+               Error("null pointer")
+               null24:
+               t.47 = [current_node]
+               t.47 = [t.47+48]
+               t.48 = call t.47(this)
+               key_aux = t.48
+               t.48 = LtS(v_key key_aux)
+               t.48 = Eq(t.48 1)
+               if0 t.48 goto :if25_else
+                  if current_node goto :null25
+                  Error("null pointer")
+                  null25:
+                  t.49 = [current_node]
+                  t.49 = [t.49+60]
+                  t.50 = call t.49(this)
+                  t.50 = Eq(t.50 1)
+                  if0 t.50 goto :if26_else
+                     if current_node goto :null26
+                     Error("null pointer")
+                     null26:
+                     t.51 = [current_node]
+                     t.51 = [t.51+44]
+                     t.52 = call t.51(this)
+                     current_node = t.52
+                     goto :if27_end
+                  if27_else:
+                     cont = 0
+                     if current_node goto :null27
+                     Error("null pointer")
+                     null27:
+                     t.53 = [current_node]
+                     t.53 = [t.53+64]
+                     t.54 = call t.53(this 1)
+                     ntb = t.54
+                     if current_node goto :null28
+                     Error("null pointer")
+                     null28:
+                     t.55 = [current_node]
+                     t.55 = [t.55+36]
+                     t.56 = call t.55(this new_node)
+                     ntb = t.56
+                     if29_end:
+                     goto :if30_end
+                  if30_else:
+                     if current_node goto :null30
+                     Error("null pointer")
+                     null30:
+                     t.57 = [current_node]
+                     t.57 = [t.57+56]
+                     t.58 = call t.57(this)
+                     t.58 = Eq(t.58 1)
+                     if0 t.58 goto :if31_else
+                        if current_node goto :null31
+                        Error("null pointer")
+                        null31:
+                        t.59 = [current_node]
+                        t.59 = [t.59+40]
+                        t.60 = call t.59(this)
+                        current_node = t.60
+                        goto :if32_end
+                     if32_else:
+                        cont = 0
+                        if current_node goto :null32
+                        Error("null pointer")
+                        null32:
+                        t.61 = [current_node]
+                        t.61 = [t.61+68]
+                        t.62 = call t.61(this 1)
+                        ntb = t.62
+                        if current_node goto :null33
+                        Error("null pointer")
+                        null33:
+                        t.63 = [current_node]
+                        t.63 = [t.63+32]
+                        t.64 = call t.63(this new_node)
+                        ntb = t.64
+                        if34_end:
+                        if35_end:
+                        goto :if36_end
+                     if36_end:
+                     ret 1
+
+                  func Tree.Delete(this v_key)
+                     current_node = this

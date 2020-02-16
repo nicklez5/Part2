@@ -1,0 +1,55 @@
+   const vmt_QS
+      :QS.Start
+      :QS.Sort
+      :QS.Print
+      :QS.Init
+
+   func Main()
+      t.0 = HeapAllocZ(12)
+      [t.0] = :vmt_QS
+      if t.0 goto :null0
+      Error("null pointer")
+      null0:
+      t.1 = [t.0]
+      t.1 = [t.1+8]
+      t.2 = call t.1(t.0 10)
+      PrintIntS(t.2)
+      ret
+
+   func QS.Start(this sz)
+      t.3 = [this]
+      t.3 = [t.3+20]
+      t.4 = call t.3(this sz)
+      aux01 = t.4
+      t.5 = [this]
+      t.5 = [t.5+16]
+      t.6 = call t.5(this)
+      aux01 = t.6
+      PrintIntS(9999)
+      t.6 = size
+      t.7 = Sub(t.6 1)
+      aux01 = t.7
+      t.8 = [this]
+      t.8 = [t.8+12]
+      t.9 = call t.8(this  0 aux01)
+      aux01 = t.9
+      t.10 = [this]
+      t.10 = [t.10+16]
+      t.11 = call t.10(this)
+      aux01 = t.11
+      ret 0
+
+   func QS.Sort(this left right)
+      t = 0
+      t.11 = LtS(left right)
+      t.11 = Eq(t.11 1)
+      if0 t.11 goto :if5_else
+         t.11 = number
+         t.12 = [null]
+         t.12 = Lt(t.12 right)
+         if t.12 goto :bound5
+            Error("array index out of bounds")
+         bound5:
+         t.12 = MulS(right 4)
+         t.12 = Add(t.12 null)
+         t.13 = [t.12+4]

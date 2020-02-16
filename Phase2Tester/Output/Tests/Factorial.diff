@@ -1,0 +1,8 @@
+--- SelfTestCases/Factorial.out	2011-04-28 14:55:20.000000000 -0700
++++ ./Output/Tests/Factorial.out	2020-02-16 14:52:29.168188785 -0800
+@@ -1 +1,4 @@
+-3628800
++--- Error (ProgramFault) ---
++expecting argument 2 to be an integer, found undefined value
++  Main() line 12
++  Fac.ComputeFac(<Heap.0>+0 10) line 23

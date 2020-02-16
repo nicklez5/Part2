@@ -1,0 +1,35 @@
+   const vmt_A
+      :A.run
+      :A.helper
+
+   func Main()
+      t.0 = HeapAllocZ(4)
+      [t.0] = :vmt_A
+      if t.0 goto :null0
+      Error("null pointer")
+      null0:
+      t.1 = [t.0]
+      t.1 = [t.1+0]
+      t.2 = call t.1(t.0)
+      PrintIntS(t.2)
+      ret
+
+   func A.run(this)
+      t.3 = [this]
+      t.3 = [t.3+4]
+      t.4 = call t.3(this 12)
+      a = t.4
+      t.5 = [this]
+      t.5 = [t.5+4]
+      t.6 = call t.5(this 15)
+      b = t.6
+      t.7 = Add(a b)
+      ret t.7
+
+   func A.helper(this param)
+      x = param
+      t.8 = Add(param 1)
+      param = t.8
+      PrintIntS(x)
+      ret x
+

@@ -833,7 +833,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     * f3 -> "]"
     */
     public String visit(ArrayLookup n, int argu) {
-        String _ret = "0";
+        String _ret = "";
         String array_id = visit(n.f0,1);
         String base_addr = id_memoryaddr.get(array_id);
         String index = visit(n.f2,1);
@@ -847,12 +847,9 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.increment_tab();
         random_print.set_code("Error(\"array index out of bounds\")");
         random_print.print_me();
-        random_print.set_code("goto :bound_end" + current_sequence_no);
-        random_print.print_me();
         random_print.decrement_tab();
         random_print.set_code("bound" + current_sequence_no + ":");
         random_print.print_me();
-        random_print.increment_tab();
         random_print.set_code("t." + current_label_no + " = MulS(" + index + " 4" + ")" );
         random_print.print_me();
         random_print.set_code("t." + current_label_no + " = Add(" + receiver_obj + " " + base_addr + ")");
@@ -860,9 +857,6 @@ public class J2V extends GJDepthFirst<String, Integer> {
 
         receiver_obj = "t." + current_label_no;
         random_print.set_code("t." + ++current_label_no + " = " + "[" + receiver_obj + "+4]");
-        random_print.print_me();
-        random_print.decrement_tab();
-        random_print.set_code("bound_end" + current_sequence_no + ":");
         random_print.print_me();
         _ret = "t." + current_label_no;
         current_sequence_no++;

@@ -1,5 +1,5 @@
 #! /bin/bash
-# UCLA CS 132, Spring 2008.  
+# UCLA CS 132, Spring 2008.
 set -e
 shopt -s nullglob  # Globs can expand to empty lists.
 
@@ -42,8 +42,8 @@ GeneratedDirs=(visitor syntaxtree)
 
 SupportFiles=()
 
-HomeworkName="hw${HomeworkNumber}"
-TarFileExpectedName="${HomeworkName}.tgz"
+HomeworkName="hw2"
+TarFileExpectedName="hw2.tar.gz"
 
 OsName=$(uname -s)
 ProcessorName=$(uname -p)
@@ -263,7 +263,7 @@ RunTests() {
 		local TargetOutput="$ResultBase.out"
 		local OutputDiff="$ResultBase.diff"
 
-		echo -n "$TestName: " 
+		echo -n "$TestName: "
 
 		# Run their compiler
 		set +e

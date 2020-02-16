@@ -1,0 +1,6 @@
+--- SelfTestCases/5-OutOfBounds.out	2011-04-28 14:55:20.000000000 -0700
++++ ./Output/Tests/5-OutOfBounds.out	2020-02-16 14:52:27.668188769 -0800
+@@ -1,3 +1,2 @@
+-0
+ --- Error (Explicit) ---
+ array index out of bounds
