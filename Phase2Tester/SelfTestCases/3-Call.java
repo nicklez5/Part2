@@ -1,4 +1,4 @@
-class OutOfBounds {
+class Main {
 	public static void main(String[] a){
 		System.out.println(new A().run());
 	}
@@ -6,9 +6,7 @@ class OutOfBounds {
 
 class A {
 	public int run() {
-		int[] a;
-		a = new int[20];
-		System.out.println(a[10]);
-		return a[40];
+		System.out.println(42);
+		return 99;
 	}
 }

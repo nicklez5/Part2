@@ -20,7 +20,7 @@ public class Class_Record{
       }
    }
    public int return_offset(String field_name){
-       int _offset = 0;
+       int _offset = -1;
        _offset = record_map.get(field_name);
        return _offset;
    }

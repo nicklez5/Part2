@@ -14,6 +14,7 @@ public class Symbol_Table{
     public void add_scope(Scope temp_scope){
         scope_stack.push(temp_scope);
     }
+
     public boolean does_it_contain(String _id){
         boolean return_value = false;
         if(id_type_map.containsKey(_id)){

@@ -10,6 +10,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    public Scope current_scope;
    public int current_offset;
    public String current_value;
+
    public static void main (String[] args){
       Goal holy_goal;
       try{
@@ -31,6 +32,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       current_scope = new Scope();
       current_offset = 0;
       current_value = "";
+      number_superclass = 0;
    }
    /**
    * f0 -> MainClass()
@@ -123,6 +125,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f5 -> "}"
    */
    public void visit(ClassDeclaration n) {
+      
       current_scope = new Scope();
       String class_name = n.f1.f0.toString();
       current_scope.add_name(class_name);
@@ -160,19 +163,16 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    * f7 -> "}"
    */
    public void visit(ClassExtendsDeclaration n) {
+
+
       current_scope = new Scope();
       n.f0.accept(this);
       visit(n.f1);
       current_scope.add_name(current_id);
       sym_table.add_map_value(current_id,Constants.CLASS_TYPE);
       n.f2.accept(this);
-      String super_class_name = n.f3.f0.toString();
-      if(sym_table.check_for_scope(super_class_name)){
-         Scope xyz_scope = sym_table.return_the_scope(super_class_name);
-         //Copying vtable and class record of the super class
-         current_scope.set_super_class(xyz_scope.class_record);
-         current_scope.set_super_vtable(xyz_scope.v_table);
-      }
+
+
       n.f4.accept(this);
       Vector<Node> list_class = n.f5.nodes;
       Iterator _itr = list_class.iterator();
@@ -180,9 +180,10 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
          field_value_on = true;
          VarDeclaration temp_var = (VarDeclaration)_itr.next();
          visit(temp_var);
-         current_scope.add_fields(current_id);
       }
       field_value_on = false;
+
+      /*
       Vector<Node> list_method = n.f6.nodes;
       _itr = list_method.iterator();
       while(_itr.hasNext()){
@@ -190,7 +191,9 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
          visit(temp_method);
 
       }
+      */
       sym_table.add_scope(current_scope);
+
    }
 
    /**
