@@ -10,6 +10,7 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
    public Scope current_scope;
    public int current_offset;
    public String current_value;
+   public Vector<String> method_vec;
 
    /*
    public static void main (String[] args){
@@ -34,8 +35,9 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       current_id = "";
       field_value_on = false;
       current_scope = new Scope();
-      current_offset = 0;
+      current_offset = 1;
       current_value = "";
+      method_vec = new Vector<String>();
 
    }
    /**
@@ -238,8 +240,8 @@ public class Symbol_Table_Parser extends DepthFirstVisitor{
       visit(n.f2);
       sym_table.add_map_value(current_id,Constants.METHOD_TYPE);
       current_scope.add_methods(current_id);
-      current_scope.add_v_table(current_id,current_offset);
-      current_offset++;
+      //current_scope.add_v_table(current_id,current_offset);
+      //current_offset++;
       n.f3.accept(this);
 
       FormalParameterList temp_list = (FormalParameterList)n.f4.node;

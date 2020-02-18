@@ -4,9 +4,9 @@
    func Main()
       t.0 = HeapAllocZ(4)
       [t.0] = :vmt_A
-      if t.0 goto :null0
+      if t.0 goto :null1
       Error("null pointer")
-      null0:
+      null1:
       t.1 = [t.0]
       t.1 = [t.1+0]
       t.2 = call t.1(t.0)
@@ -18,26 +18,30 @@
       t.3 = Add(t.3 4)
       t.4 = HeapAllocZ(t.3)
       [t.4] = 20
-      if t.4 goto :null1
+      if t.4 goto :null2
          Error("null pointer")
-      null1:
+      null2:
       a = [t.4]
       t.5 = [t.4]
-      t.5 = Lt(t.5 10)
-      if t.5 goto :bound2
+      t.5 = Lt(10 t.5)
+      if t.5 goto :bound3
          Error("array index out of bounds")
-      bound2:
-      t.5 = MulS(10 4)
-      t.5 = Add(t.5 t.4)
-      t.6 = [t.5+4]
+         goto :bound_end3
+      bound3:
+         t.5 = MulS(10 4)
+         t.5 = Add(t.5 t.4)
+         t.6 = [t.5+4]
+      bound_end3:
       PrintIntS(t.6)
       t.7 = [t.4]
-      t.7 = Lt(t.7 40)
-      if t.7 goto :bound3
+      t.7 = Lt(40 t.7)
+      if t.7 goto :bound4
          Error("array index out of bounds")
-      bound3:
-      t.7 = MulS(40 4)
-      t.7 = Add(t.7 t.4)
-      t.8 = [t.7+4]
+         goto :bound_end4
+      bound4:
+         t.7 = MulS(40 4)
+         t.7 = Add(t.7 t.4)
+         t.8 = [t.7+4]
+      bound_end4:
       ret t.8
 

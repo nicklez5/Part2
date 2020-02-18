@@ -23,7 +23,7 @@
       null1:
       a = [t.4]
       t.5 = [t.4]
-      t.5 = Lt(t.5 10)
+      t.5 = Lt(10 t.5)
       if t.5 goto :bound2
          Error("array index out of bounds")
          goto :bound_end2
@@ -34,7 +34,7 @@
       bound_end2:
       PrintIntS(t.6)
       t.7 = [t.4]
-      t.7 = Lt(t.7 40)
+      t.7 = Lt(40 t.7)
       if t.7 goto :bound3
          Error("array index out of bounds")
          goto :bound_end3

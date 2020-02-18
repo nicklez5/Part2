@@ -1,0 +1,35 @@
+--- SelfTestCases/BinaryTree.out	2011-04-28 14:55:20.000000000 -0700
++++ ./Output/Tests/BinaryTree.out	2020-02-17 22:35:00.997459691 -0800
+@@ -1,26 +1,6 @@
+-16
+-100000000
+-8
+-16
+-4
+-8
+-12
+-14
+-16
+-20
+-24
+-28
+-1
+-1
+-1
+-0
+-1
+-4
+-8
+-14
+-16
+-20
+-24
+-28
+-0
+-0
++--- Error (ProgramFault) ---
++invalid arguments: (undefined value, integer1)
++  Main() line 33
++  BT.Start(<Heap.0>+0) line 53
++  Tree.Print(<Heap.1>+0) line 768
++  Tree.RecPrint(<Heap.1>+0 <Heap.1>+0) line 779

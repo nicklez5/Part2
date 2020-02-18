@@ -279,30 +279,30 @@
             cont = 1
             t.46 = Eq(cont 1)
             if0 t.46 goto :if26_end
-               if t.35 goto :null28
+               if t.27 goto :null28
                Error("null pointer")
                null28:
-               t.47 = [t.35]
+               t.47 = [t.27]
                t.47 = [t.47+20]
-               t.48 = call t.47(t.35)
+               t.48 = call t.47(t.27)
                key_aux = t.48
                t.48 = LtS(v_key key_aux)
                t.48 = Eq(t.48 1)
                if0 t.48 goto :if30_else
-                  if t.35 goto :null32
+                  if t.27 goto :null32
                   Error("null pointer")
                   null32:
-                  t.49 = [t.35]
+                  t.49 = [t.27]
                   t.49 = [t.49+32]
-                  t.50 = call t.49(t.35)
+                  t.50 = call t.49(t.27)
                   t.50 = Eq(t.50 1)
                   if0 t.50 goto :if33_else
-                     if t.35 goto :null34
+                     if t.27 goto :null34
                      Error("null pointer")
                      null34:
-                     t.51 = [t.35]
+                     t.51 = [t.27]
                      t.51 = [t.51+16]
-                     t.52 = call t.51(t.35)
+                     t.52 = call t.51(t.27)
                      current_node = t.52
                      goto :if33_end
                   if33_else:
@@ -370,31 +370,31 @@
                      is_root = 1
                      t.64 = Eq(cont 1)
                      if0 t.64 goto :if49_end
-                        if t.33 goto :null51
+                        if t.0 goto :null51
                         Error("null pointer")
                         null51:
-                        t.65 = [t.33]
+                        t.65 = [t.0]
                         t.65 = [t.65+20]
-                        t.66 = call t.65(t.33)
+                        t.66 = call t.65(t.0)
                         key_aux = t.66
                         t.66 = LtS(v_key key_aux)
                         t.66 = Eq(t.66 1)
                         if0 t.66 goto :if53_else
-                           if t.33 goto :null54
+                           if t.0 goto :null54
                            Error("null pointer")
                            null54:
-                           t.67 = [t.33]
+                           t.67 = [t.0]
                            t.67 = [t.67+32]
-                           t.68 = call t.67(t.33)
+                           t.68 = call t.67(t.0)
                            t.68 = Eq(t.68 1)
                            if0 t.68 goto :if55_else
                               parent_node = current_node
-                              if t.33 goto :null58
+                              if t.0 goto :null58
                               Error("null pointer")
                               null58:
-                              t.69 = [t.33]
+                              t.69 = [t.0]
                               t.69 = [t.69+16]
-                              t.70 = call t.69(t.33)
+                              t.70 = call t.69(t.0)
                               current_node = t.70
                               goto :if55_end
                            if55_else:

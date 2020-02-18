@@ -14,6 +14,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String super_class_name;
     public Helper_Function xyz;
     public Map<String, String> id_memoryaddr;
+    public Map<String, String> id_value;
     public boolean main_case;
     public static void main(String[] args){
         Goal holy_goal;
@@ -45,7 +46,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         current_scope = new Scope();
         xyz = new Helper_Function();
         sym_stack = new Stack<String>();
-
+        id_value = new HashMap<String,String>();
         id_memoryaddr = new HashMap<String,String>();
         main_case = true;
     }
@@ -57,14 +58,35 @@ public class J2V extends GJDepthFirst<String, Integer> {
         current_label_no = -1;
         xyz = new Helper_Function(main_table);
         id_memoryaddr = new HashMap<String,String>();
+        id_value = new HashMap<String,String>();
         sym_stack = new Stack<String>();
-
+        traverse_method();
         current_class_name = "";
         current_sequence_no = 0;
         main_case = true;
     }
-
-
+    public boolean check_substring(String xyz){
+        if(xyz.contains("t.")){
+            return true;
+        }
+        return false;
+    }
+    public void traverse_method(){
+        Stack<Scope> temp_scope_stack = main_table.scope_stack;
+        Iterator _itr = temp_scope_stack.iterator();
+        Vector<String> temp_methods;
+        while(_itr.hasNext()){
+            Scope temp_scope = (Scope)_itr.next();
+            temp_methods = temp_scope.methods;
+            Iterator _itz = temp_methods.iterator();
+            int offset_no = 0;
+            while(_itz.hasNext()){
+                String method_id = (String)_itz.next();
+                temp_scope.add_v_table(method_id,offset_no);
+                offset_no++;
+            }
+        }
+    }
     /**
     * f0 -> MainClass()
     * f1 -> ( TypeDeclaration() )*
@@ -290,11 +312,15 @@ public class J2V extends GJDepthFirst<String, Integer> {
         if(temp_formal_list != null){
             formal_parameter_id = visit(temp_formal_list,1);
             random_print.set_code("func " + current_scope.name + "." + method_id + "(this " + formal_parameter_id + ")");
+            random_print.print_me();
+            random_print.increment_tab();
+            //current_label_no
         }else{
             random_print.set_code("func " + current_scope.name + "." + method_id + "(this)");
+            random_print.print_me();
+            random_print.increment_tab();
         }
-        random_print.print_me();
-        random_print.increment_tab();
+;
 
         Vector<Node> statement_nodes = n.f8.nodes;
         Iterator _itr = statement_nodes.iterator();
@@ -406,6 +432,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     */
     public String visit(Statement n, int argu) {
         String _ret = "";
+
         if(n.f0.which == 0){
             visit((Block)n.f0.choice,1);
         }else if(n.f0.which == 1){
@@ -430,9 +457,11 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(Block n, int argu) {
         String _ret = "";
         n.f0.accept(this, argu);
+
         l_nodes = n.f1.nodes;
         Iterator _itr = l_nodes.iterator();
         while(_itr.hasNext()){
+            ++current_sequence_no;
             Statement xyz_1 = (Statement)_itr.next();
             visit(xyz_1 , 1);
         }
@@ -485,12 +514,16 @@ public class J2V extends GJDepthFirst<String, Integer> {
         }else{
             //System.out.println("Entering non field");
             right_operand_value = visit(n.f2,1);
+
             _ret = String.format(operand_id + " = " + right_operand_value);
-            if(!id_memoryaddr.containsKey(operand_id)){
-                id_memoryaddr.put(operand_id,sym_stack.pop());
-            }else{
-                id_memoryaddr.replace(operand_id,sym_stack.pop());
+            if(!sym_stack.empty()){
+                if(!id_memoryaddr.containsKey(operand_id)){
+                    id_memoryaddr.put(operand_id,sym_stack.pop());
+                }else{
+                    id_memoryaddr.replace(operand_id,sym_stack.pop());
+                }
             }
+            //id_value.put(operand_id,s)
             random_print.set_code(_ret);
             random_print.print_me();
 
@@ -530,7 +563,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String array_id = n.f0.f0.toString();
         array_id = id_memoryaddr.get(array_id);
         String array_index = visit(n.f2,1);
-
+        ++current_sequence_no;
         int field_index = 0;
         String receiver_obj = "";
         String exp_value = "";
@@ -570,7 +603,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
                     random_print.print_me();
 
                     _ret = "t." + current_label_no;
-                    current_sequence_no++;
+                    //current_sequence_no++;
 
                 }
             }
@@ -594,26 +627,34 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String operand_1 = "";
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
+        int choice_num = 0;
         operand_1 = visit(n.f2,1);
         //Could be LTS, and expression
+        ++current_sequence_no;
         random_print.set_code("t." + current_label_no + " = Eq(" + operand_1 + " 1)");
         random_print.print_me();
 
         random_print.set_code("if0 t." + current_label_no + " goto :if" + current_sequence_no + "_else");
         random_print.print_me();
         random_print.increment_tab();
+        choice_num = current_sequence_no;
         visit(n.f4,1);
-        random_print.set_code("goto :if" + current_sequence_no + "_end");
+        //System.out.println("Sequence no:" + choice_num);
+        random_print.set_code("goto :if" + choice_num + "_end");
         random_print.print_me();
         random_print.decrement_tab();
-        random_print.set_code("if" + current_sequence_no + "_else:");
+        random_print.set_code("if" + choice_num + "_else:");
         random_print.print_me();
 
         random_print.increment_tab();
+
         visit(n.f6,1);
-        random_print.set_code("if" + current_sequence_no + "_end:");
-        current_sequence_no++;
+
+        random_print.set_code("if" + choice_num + "_end:");
+
+
         random_print.print_me();
+
         return _ret;
     }
 
@@ -627,16 +668,19 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(WhileStatement n, int argu) {
         String _ret = "";
         String operand_1 = visit(n.f2,1);
+        int choice_num = 0;
+        ++current_sequence_no;
         random_print.set_code("t." + current_label_no + " = Eq(" + operand_1 + " 1)");
         random_print.print_me();
         random_print.set_code("if0 t." + current_label_no + " goto :if" + current_sequence_no + "_end");
         random_print.print_me();
         random_print.increment_tab();
+        choice_num = current_sequence_no;
         visit(n.f4,1);
-        random_print.set_code("goto :if" + current_sequence_no + "_end");
+        random_print.set_code("goto :if" + choice_num + "_end");
         random_print.print_me();
         random_print.decrement_tab();
-        random_print.set_code("if" + current_sequence_no + "_end:");
+        random_print.set_code("if" + choice_num + "_end:");
         random_print.print_me();
 
         return _ret;
@@ -703,9 +747,11 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String _ret = "";
         String operand_1 = visit(n.f0,1);
         String operand_2 = visit(n.f2,1);
+        ++current_sequence_no;
         current_label_no++;
         String result = String.format("t." + current_label_no);
         current_label_no++;
+
         _ret = String.format("t." + current_label_no + " = " + "Eq(" + operand_1 + " " + "0)");
         random_print.set_code(_ret);
         random_print.print_me();
@@ -722,7 +768,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.set_code(_ret);
         random_print.print_me();
 
-        _ret = String.format("if0 = t." + current_label_no + " goto :if" + current_sequence_no + "_else");
+        _ret = String.format("if0 t." + current_label_no + " goto :if" + current_sequence_no + "_else");
         random_print.set_code(_ret);
         random_print.print_me();
 
@@ -750,7 +796,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.set_code(_ret);
         random_print.print_me();
 
-        current_sequence_no++;
+
 
         return result;
     }
@@ -764,8 +810,8 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String _ret = "";
         String first_operand = visit(n.f0,1);
         String second_operand = visit(n.f2,1);
-
         random_print.set_code("t." + current_label_no + " = LtS(" + first_operand + " " + second_operand + ")");
+
         random_print.print_me();
         _ret = String.format("t." + current_label_no);
 
@@ -837,10 +883,11 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String array_id = visit(n.f0,1);
         String base_addr = id_memoryaddr.get(array_id);
         String index = visit(n.f2,1);
+        ++current_sequence_no;
         random_print.set_code("t." + ++current_label_no + " = [" + base_addr + "]");
         random_print.print_me();
         String receiver_obj = "t." + current_label_no;
-        random_print.set_code("t." + current_label_no + " = Lt(" + receiver_obj + " " + index + ")");
+        random_print.set_code("t." + current_label_no + " = Lt(" + index + " " + receiver_obj + ")");
         random_print.print_me();
         random_print.set_code("if t." + current_label_no + " goto :bound" + current_sequence_no);
         random_print.print_me();
@@ -865,7 +912,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.set_code("bound_end" + current_sequence_no + ":");
         random_print.print_me();
         _ret = "t." + current_label_no;
-        current_sequence_no++;
+
         return _ret;
     }
 
@@ -895,12 +942,20 @@ public class J2V extends GJDepthFirst<String, Integer> {
     * f5 -> ")"
     */
     public String visit(MessageSend n, int argu) {
+
         String _ret = "";
+        String func_name = n.f2.f0.toString();
         String operand_id = visit(n.f0,1);
-        //System.out.println("Message Send exp:" + operand_id);
+        String saved_string = operand_id;
+        if(!check_substring(operand_id)){
+            operand_id = id_memoryaddr.get(operand_id);
+        }
+        if(operand_id == null){
+            operand_id = saved_string;
+        }
         String argument_list = "";
         ExpressionList temp_exp_list = (ExpressionList)n.f4.node;
-        String func_name = "";
+        ++current_sequence_no;
         if(!operand_id.equals("this")){
             //Check for null pointer
             //if t.1 goto :null1
@@ -911,7 +966,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
             random_print.set_code("null" + current_sequence_no + ":");
             random_print.print_me();
         }
-        func_name = n.f2.f0.toString();
+        //func_name = n.f2.f0.toString();
         int func_offset = 0;
         if(current_scope.check_method(func_name)){
             func_offset = current_scope.v_table.get_offset(func_name);
@@ -925,37 +980,30 @@ public class J2V extends GJDepthFirst<String, Integer> {
                 }
             }
         }
-        current_sequence_no++;
+
         current_label_no++;
 
         //Look for the field. OPERAND _ ID
         random_print.set_code("t." + current_label_no + " = [" + operand_id + "]");
         random_print.print_me();
         String receiver_obj = operand_id;
-        func_offset = func_offset - 1;
-        func_offset = func_offset * 4 + 4;
+        //func_offset = func_offset - 1;
+        func_offset = func_offset * 4 ;
         random_print.set_code("t." + current_label_no + " = [t." + current_label_no + "+" + func_offset + "]");
         random_print.print_me();
         String temp_receiver = String.format("t." + current_label_no);
 
         current_label_no++;
 
-        //Check for an argument list avaliable.
+        //Argument List is NOT NULL
         if(temp_exp_list != null){
             argument_list = visit(temp_exp_list,1);
-            if(main_case){
-                random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(" + receiver_obj + " " + argument_list + ")");
-                main_case = false;
-            }else{
-                random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(this " + argument_list + ")");
-            }
+            random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(" + receiver_obj + " " + argument_list + ")");
+
+        //Argument List is NULL
         }else{
-            if(main_case){
-                random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(" + receiver_obj + "" + argument_list + ")");
-                main_case = false;
-            }else{
-                random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(this)");
-            }
+            random_print.set_code("t." + current_label_no + " = call " + temp_receiver + "(" + receiver_obj  + ")");
+
 
         }
         random_print.print_me();
@@ -1035,6 +1083,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(IntegerLiteral n, int argu) {
         String _ret = "";
         _ret = n.f0.toString();
+        sym_stack.push(_ret);
         /*
         if(!id_memoryaddr.containsKey(n.f0.toString())){
             _ret = String.format("t." + current_label_no);
@@ -1071,6 +1120,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
     public String visit(Identifier n, int argu) {
         String _ret = "";
         String value_id = n.f0.toString();
+
         String value_type = main_table.id_type_map.get(value_id);
         if(value_type.equals(Constants.FIELD_TYPE)){
             if(!id_memoryaddr.containsKey(value_type)){
@@ -1095,6 +1145,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
 
         String _ret = "";
         _ret = "this";
+        //sym_stack.push("[this]");
         return _ret;
 
         //_ret = "this";
@@ -1122,6 +1173,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
         n.f2.accept(this, argu);
+        ++current_sequence_no;
         String array_size = visit(n.f3,1);
         current_label_no++;
         //Get the value;
@@ -1144,7 +1196,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.decrement_tab();
         random_print.set_code("null" + current_sequence_no + ":");
         random_print.print_me();
-        current_sequence_no++;
+
         _ret = String.format("[t." + current_label_no + "]");
         return _ret;
     }
@@ -1190,11 +1242,13 @@ public class J2V extends GJDepthFirst<String, Integer> {
         String _ret=null;
         String exp_id = visit(n.f1,1);
         String result = String.format("t." + current_label_no);
+        //System.out.println("I was here");
         current_label_no++;
+        ++current_sequence_no;
         _ret = String.format("t." + current_label_no + " = " + "Eq(" + exp_id + " " + "0)");
         random_print.set_code(_ret);
         random_print.print_me();
-        random_print.set_code("if0 t." + current_label_no  + " goto :if" + current_sequence_no + "_else");
+        random_print.set_code("if0 t." + current_label_no  + " goto :if" + ++current_sequence_no + "_else");
         random_print.print_me();
         random_print.increment_tab();
         random_print.set_code(result + " = 0");
@@ -1210,7 +1264,7 @@ public class J2V extends GJDepthFirst<String, Integer> {
         random_print.decrement_tab();
         random_print.set_code("if" + current_sequence_no + "_end:");
         random_print.print_me();
-        current_sequence_no++;
+
         _ret = result;
         return _ret;
     }
@@ -1221,10 +1275,10 @@ public class J2V extends GJDepthFirst<String, Integer> {
     * f2 -> ")"
     */
     public String visit(BracketExpression n, int argu) {
-        String _ret=null;
-        n.f0.accept(this, argu);
-        n.f1.accept(this, argu);
-        n.f2.accept(this, argu);
+        String _ret = "";
+
+        _ret = visit(n.f1,1);
+
         return _ret;
     }
 }

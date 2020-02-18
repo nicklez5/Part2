@@ -4,9 +4,9 @@
    func Main()
       t.0 = HeapAllocZ(4)
       [t.0] = :vmt_Fac
-      if t.0 goto :null0
+      if t.0 goto :null1
       Error("null pointer")
-      null0:
+      null1:
       t.1 = [t.0]
       t.1 = [t.1+0]
       t.2 = call t.1(t.0 10)
@@ -16,12 +16,16 @@
    func Fac.ComputeFac(this num)
       t.2 = LtS(num 1)
       t.2 = Eq(t.2 1)
-      if0 t.2 goto :if1_else
+      if0 t.2 goto :if2_else
          num_aux = 1
-         goto :if1_end
-      if1_else:
-         t.3 = MulS(num null)
-         num_aux = t.3
-         if1_end:
+         goto :if2_end
+      if2_else:
+         t.3 = [this]
+         t.3 = [t.3+0]
+         t.5 = Sub(num 1)
+         t.5 = call t.3(this t.5)
+         t.6 = MulS(num t.5)
+         num_aux = t.6
+         if2_end:
          ret num_aux
 

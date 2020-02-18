@@ -1,4 +1,1 @@
---- Error (ProgramFault) ---
-expecting argument 2 to be an integer, found undefined value
-  Main() line 12
-  Fac.ComputeFac(<Heap.0>+0 10) line 23
+3628800

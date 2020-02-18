@@ -1,0 +1,6 @@
+--- Error (ProgramFault) ---
+invalid arguments: (undefined value, integer1)
+  Main() line 33
+  BT.Start(<Heap.0>+0) line 53
+  Tree.Print(<Heap.1>+0) line 768
+  Tree.RecPrint(<Heap.1>+0 <Heap.1>+0) line 779

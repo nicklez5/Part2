@@ -1,0 +1,5 @@
+--- Error (ProgramFault) ---
+expecting argument 2 to be an integer, found undefined value
+  Main() line 15
+  QS.Start(<Heap.0>+0 10) line 26
+  QS.Print(<Heap.0>+0) line 175

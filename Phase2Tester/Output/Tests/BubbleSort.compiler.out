@@ -7,31 +7,31 @@
    func Main()
       t.0 = HeapAllocZ(12)
       [t.0] = :vmt_BBS
-      if t.0 goto :null0
+      if t.0 goto :null1
       Error("null pointer")
-      null0:
+      null1:
       t.1 = [t.0]
-      t.1 = [t.1+8]
+      t.1 = [t.1+0]
       t.2 = call t.1(t.0 10)
       PrintIntS(t.2)
       ret
 
    func BBS.Start(this sz)
       t.3 = [this]
-      t.3 = [t.3+20]
+      t.3 = [t.3+12]
       t.4 = call t.3(this sz)
       aux01 = t.4
       t.5 = [this]
-      t.5 = [t.5+16]
+      t.5 = [t.5+8]
       t.6 = call t.5(this)
       aux01 = t.6
       PrintIntS(99999)
       t.7 = [this]
-      t.7 = [t.7+12]
+      t.7 = [t.7+4]
       t.8 = call t.7(this)
       aux01 = t.8
       t.9 = [this]
-      t.9 = [t.9+16]
+      t.9 = [t.9+8]
       t.10 = call t.9(this)
       aux01 = t.10
       ret 0
@@ -44,4 +44,106 @@
       aux02 = t.12
       t.12 = LtS(aux02 i)
       t.12 = Eq(t.12 1)
-      if0 t.12 goto :if5_end
+      if0 t.12 goto :if6_end
+         j = 1
+         t.13 = Add(i 1)
+         t.13 = LtS(j t.13)
+         t.13 = Eq(t.13 1)
+         if0 t.13 goto :if9_end
+            t.14 = Sub(j 1)
+            aux07 = t.14
+            t.14 = number
+            t.15 = [null]
+            t.15 = Lt(aux07 t.15)
+            if t.15 goto :bound12
+               Error("array index out of bounds")
+               goto :bound_end12
+            bound12:
+               t.15 = MulS(aux07 4)
+               t.15 = Add(t.15 null)
+               t.16 = [t.15+4]
+            bound_end12:
+            aux04 = t.16
+            t.16 = number
+            t.17 = [null]
+            t.17 = Lt(j t.17)
+            if t.17 goto :bound14
+               Error("array index out of bounds")
+               goto :bound_end14
+            bound14:
+               t.17 = MulS(j 4)
+               t.17 = Add(t.17 null)
+               t.18 = [t.17+4]
+            bound_end14:
+            aux05 = t.18
+            t.18 = LtS(aux05 aux04)
+            t.18 = Eq(t.18 1)
+            if0 t.18 goto :if16_else
+               t.19 = Sub(j 1)
+               aux06 = t.19
+               t.19 = number
+               t.20 = [null]
+               t.20 = Lt(aux06 t.20)
+               if t.20 goto :bound19
+                  Error("array index out of bounds")
+                  goto :bound_end19
+               bound19:
+                  t.20 = MulS(aux06 4)
+                  t.20 = Add(t.20 null)
+                  t.21 = [t.20+4]
+               bound_end19:
+               t = t.21
+               goto :if16_end
+            if16_else:
+               nt = 0
+               if16_end:
+               t.22 = Add(j 1)
+               j = t.22
+               goto :if9_end
+            if9_end:
+            t.23 = Sub(i 1)
+            i = t.23
+            goto :if6_end
+         if6_end:
+         ret 0
+
+      func BBS.Print(this)
+         j = 0
+         t.23 = size
+         t.23 = LtS(j t.23)
+         t.23 = Eq(t.23 1)
+         if0 t.23 goto :if26_end
+            t.23 = number
+            t.24 = [null]
+            t.24 = Lt(j t.24)
+            if t.24 goto :bound28
+               Error("array index out of bounds")
+               goto :bound_end28
+            bound28:
+               t.24 = MulS(j 4)
+               t.24 = Add(t.24 null)
+               t.25 = [t.24+4]
+            bound_end28:
+            PrintIntS(t.25)
+            t.26 = Add(j 1)
+            j = t.26
+            goto :if26_end
+         if26_end:
+         ret 0
+
+      func BBS.Init(this sz)
+         t.26 = [this]
+         t.26 = [t.26 + 12]
+         t.26 = sz
+         t.26 = [this]
+         t.26 = [t.26 + 8]
+         t.27 = MulS(sz 4)
+         t.27 = Add(t.27 4)
+         t.28 = HeapAllocZ(t.27)
+         [t.28] = sz
+         if t.28 goto :null30
+            Error("null pointer")
+         null30:
+         t.26 = [t.28]
+         ret 0
+

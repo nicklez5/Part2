@@ -22,24 +22,24 @@
    func Main()
       t.0 = HeapAllocZ(4)
       [t.0] = :vmt_LL
-      if t.0 goto :null0
+      if t.0 goto :null1
       Error("null pointer")
-      null0:
+      null1:
       t.1 = [t.0]
-      t.1 = [t.1+88]
+      t.1 = [t.1+0]
       t.2 = call t.1(t.0)
       PrintIntS(t.2)
       ret
 
    func Element.Init(this v_Age v_Salary v_Married)
       t.2 = [this]
-      t.2 = [t.2 + 4]
+      t.2 = [t.2 + 8]
       t.2 = v_Age
       t.2 = [this]
-      t.2 = [t.2 + 8]
+      t.2 = [t.2 + 12]
       t.2 = v_Salary
       t.2 = [this]
-      t.2 = [t.2 + 12]
+      t.2 = [t.2 + 16]
       t.2 = v_Married
       ret 1
 
@@ -57,85 +57,574 @@
 
    func Element.Equal(this other)
       ret_val = 1
-      if other goto :null1
+      if other goto :null2
       Error("null pointer")
-      null1:
+      null2:
       t.3 = [other]
-      t.3 = [t.3+16]
-      t.4 = call t.3(this)
+      t.3 = [t.3+4]
+      t.4 = call t.3(other)
       aux01 = t.4
       t.5 = [this]
-      t.5 = [t.5+32]
+      t.5 = [t.5+20]
       t.6 = Age
       t.6 = call t.5(this  aux01 t.6)
       t.7 = Eq(t.6 0)
-      if0 t.7 goto :if3_else
+      if0 t.7 goto :if5_else
          t.6 = 0
-         goto :if3_end
-      if3_else:
+         goto :if5_end
+      if5_else:
          t.6 = 1
-      if3_end:
+      if5_end:
       t.7 = Eq(t.6 1)
-      if0 t.7 goto :if4_else
+      if0 t.7 goto :if6_else
          ret_val = 0
-         goto :if4_end
-      if4_else:
-         if other goto :null4
+         goto :if6_end
+      if6_else:
+         if other goto :null8
          Error("null pointer")
-         null4:
+         null8:
          t.8 = [other]
-         t.8 = [t.8+20]
-         t.9 = call t.8(this)
+         t.8 = [t.8+8]
+         t.9 = call t.8(other)
          aux02 = t.9
          t.10 = [this]
-         t.10 = [t.10+32]
+         t.10 = [t.10+20]
          t.11 = Salary
          t.11 = call t.10(this  aux02 t.11)
          t.12 = Eq(t.11 0)
-         if0 t.12 goto :if6_else
+         if0 t.12 goto :if12_else
             t.11 = 0
-            goto :if6_end
-         if6_else:
+            goto :if12_end
+         if12_else:
             t.11 = 1
-         if6_end:
+         if12_end:
          t.12 = Eq(t.11 1)
-         if0 t.12 goto :if7_else
+         if0 t.12 goto :if13_else
             ret_val = 0
-            goto :if7_end
-         if7_else:
+            goto :if13_end
+         if13_else:
             t.12 = Married
             t.12 = Eq(t.12 1)
-            if0 t.12 goto :if7_else
-               if other goto :null7
+            if0 t.12 goto :if14_else
+               if other goto :null15
                Error("null pointer")
-               null7:
+               null15:
                t.13 = [other]
-               t.13 = [t.13+24]
-               t.14 = call t.13(this)
+               t.13 = [t.13+12]
+               t.14 = call t.13(other)
                t.15 = Eq(t.14 0)
-               if0 t.15 goto :if8_else
+               if0 t.15 goto :if17_else
                   t.14 = 0
-                  goto :if8_end
-               if8_else:
+                  goto :if17_end
+               if17_else:
                   t.14 = 1
-               if8_end:
+               if17_end:
                t.15 = Eq(t.14 1)
-               if0 t.15 goto :if9_else
+               if0 t.15 goto :if18_else
                   ret_val = 0
-                  goto :if9_end
-               if9_else:
+                  goto :if18_end
+               if18_else:
                   nt = 0
-                  if9_end:
-                  goto :if10_end
-               if10_else:
-                  if other goto :null10
+                  if18_end:
+                  goto :if14_end
+               if14_else:
+                  if other goto :null19
                   Error("null pointer")
-                  null10:
+                  null19:
                   t.16 = [other]
-                  t.16 = [t.16+24]
-                  t.17 = call t.16(this)
+                  t.16 = [t.16+12]
+                  t.17 = call t.16(other)
                   t.17 = Eq(t.17 1)
-                  if0 t.17 goto :if11_else
+                  if0 t.17 goto :if20_else
                      ret_val = 0
-                     goto :if11_end
-                  if11_else:
+                     goto :if20_end
+                  if20_else:
+                     nt = 0
+                     if20_end:
+                     if14_end:
+                     if13_end:
+                     if6_end:
+                     ret ret_val
+
+                  func Element.Compare(this num1 num2)
+                     retval = 0
+                     t.18 = Add(num2 1)
+                     aux02 = t.18
+                     t.18 = LtS(num1 num2)
+                     t.18 = Eq(t.18 1)
+                     if0 t.18 goto :if21_else
+                        retval = 0
+                        goto :if21_end
+                     if21_else:
+                        t.18 = LtS(num1 aux02)
+                        t.19 = Eq(t.18 0)
+                        if0 t.19 goto :if23_else
+                           t.18 = 0
+                           goto :if23_end
+                        if23_else:
+                           t.18 = 1
+                        if23_end:
+                        t.19 = Eq(t.18 1)
+                        if0 t.19 goto :if24_else
+                           retval = 0
+                           goto :if24_end
+                        if24_else:
+                           retval = 1
+                           if24_end:
+                           if21_end:
+                           ret retval
+
+                        func List.Init(this)
+                           t.19 = [this]
+                           t.19 = [t.19 + 28]
+                           t.19 = 1
+                           ret 1
+
+                        func List.InitNew(this v_elem v_next v_end)
+                           t.19 = [this]
+                           t.19 = [t.19 + 28]
+                           t.19 = v_end
+                           t.19 = [this]
+                           t.19 = [t.19 + 20]
+                           t.19 = v_elem
+                           t.19 = [this]
+                           t.19 = [t.19 + 24]
+                           t.19 = v_next
+                           ret 1
+
+                        func List.Insert(this new_elem)
+                           aux03 = this
+                           t.20 = HeapAllocZ(16)
+                           [t.20] = :vmt_List
+                           aux02 = t.20
+                           if t.20 goto :null25
+                           Error("null pointer")
+                           null25:
+                           t.21 = [t.20]
+                           t.21 = [t.21+4]
+                           t.22 = call t.21(t.20   new_elem aux03 0)
+                           ret_val = t.22
+                           ret aux02
+
+                        func List.SetNext(this v_next)
+                           t.22 = [this]
+                           t.22 = [t.22 + 24]
+                           t.22 = v_next
+                           ret 1
+
+                        func List.Delete(this e)
+                           my_head = this
+                           ret_val = 0
+                           t.23 = Sub(0 1)
+                           aux04 = t.23
+                           aux01 = this
+                           prev = this
+                           t.23 = end
+                           var_end = t.23
+                           t.23 = elem
+                           var_elem = t.23
+                           t.24 = Eq(var_end 0)
+                           if0 t.24 goto :if27_else
+                              t.23 = 0
+                              goto :if27_end
+                           if27_else:
+                              t.23 = 1
+                           if27_end:
+                           t.25 = Eq(ret_val 0)
+                           if0 t.25 goto :if29_else
+                              t.24 = 0
+                              goto :if29_end
+                           if29_else:
+                              t.24 = 1
+                           if29_end:
+                           t.27 = Eq(t.23 0)
+                           if0 t.27 goto :if30_else
+                           t.26 = 0
+                           t.27 = Eq(t.24 0)
+                           if0 t.27 goto :if30_else
+                           t.26 = 1
+                           goto :if30_end
+                           if30_else:
+                              t.26 = 0
+                           if30_end:
+                           t.27 = Eq(t.26 1)
+                           if0 t.27 goto :if31_end
+                              if e goto :null33
+                              Error("null pointer")
+                              null33:
+                              t.28 = [e]
+                              t.28 = [t.28+16]
+                              t.29 = call t.28(e var_elem)
+                              t.29 = Eq(t.29 1)
+                              if0 t.29 goto :if34_else
+                                 ret_val = 1
+                                 t.29 = LtS(aux04 0)
+                                 t.29 = Eq(t.29 1)
+                                 if0 t.29 goto :if37_else
+                                    if 0 goto :null39
+                                    Error("null pointer")
+                                    null39:
+                                    t.30 = [0]
+                                    t.30 = [t.30+32]
+                                    t.31 = call t.30(0)
+                                    my_head = t.31
+                                    goto :if37_end
+                                 if37_else:
+                                    t.32 = Sub(0 555)
+                                    PrintIntS(t.32)
+                                    if prev goto :null42
+                                    Error("null pointer")
+                                    null42:
+                                    t.33 = [prev]
+                                    t.33 = [t.33+12]
+                                    if 0 goto :null43
+                                    Error("null pointer")
+                                    null43:
+                                    t.35 = [0]
+                                    t.35 = [t.35+32]
+                                    t.36 = call t.35(0)
+                                    t.36 = call t.33(prev t.36)
+                                    aux05 = t.36
+                                    t.37 = Sub(0 555)
+                                    PrintIntS(t.37)
+                                    if37_end:
+                                    goto :if34_end
+                                 if34_else:
+                                    nt = 0
+                                    if34_end:
+                                    t.38 = Eq(ret_val 0)
+                                    if0 t.38 goto :if47_else
+                                       t.37 = 0
+                                       goto :if47_end
+                                    if47_else:
+                                       t.37 = 1
+                                    if47_end:
+                                    t.38 = Eq(t.37 1)
+                                    if0 t.38 goto :if48_else
+                                       prev = aux01
+                                       if 0 goto :null51
+                                       Error("null pointer")
+                                       null51:
+                                       t.39 = [0]
+                                       t.39 = [t.39+32]
+                                       t.40 = call t.39(0)
+                                       aux01 = t.40
+                                       if t.40 goto :null53
+                                       Error("null pointer")
+                                       null53:
+                                       t.41 = [t.40]
+                                       t.41 = [t.41+24]
+                                       t.42 = call t.41(t.40)
+                                       var_end = t.42
+                                       if t.40 goto :null55
+                                       Error("null pointer")
+                                       null55:
+                                       t.43 = [t.40]
+                                       t.43 = [t.43+28]
+                                       t.44 = call t.43(t.40)
+                                       var_elem = t.44
+                                       aux04 = 1
+                                       goto :if48_end
+                                    if48_else:
+                                       nt = 0
+                                       if48_end:
+                                       goto :if31_end
+                                    if31_end:
+                                    ret my_head
+
+                                 func List.Search(this e)
+                                    int_ret_val = 0
+                                    aux01 = this
+                                    t.44 = end
+                                    var_end = t.44
+                                    t.44 = elem
+                                    var_elem = t.44
+                                    t.45 = Eq(var_end 0)
+                                    if0 t.45 goto :if58_else
+                                       t.44 = 0
+                                       goto :if58_end
+                                    if58_else:
+                                       t.44 = 1
+                                    if58_end:
+                                    t.45 = Eq(t.44 1)
+                                    if0 t.45 goto :if59_end
+                                       if e goto :null61
+                                       Error("null pointer")
+                                       null61:
+                                       t.46 = [e]
+                                       t.46 = [t.46+16]
+                                       t.47 = call t.46(e var_elem)
+                                       t.47 = Eq(t.47 1)
+                                       if0 t.47 goto :if62_else
+                                          int_ret_val = 1
+                                          goto :if62_end
+                                       if62_else:
+                                          nt = 0
+                                          if62_end:
+                                          if 0 goto :null65
+                                          Error("null pointer")
+                                          null65:
+                                          t.48 = [0]
+                                          t.48 = [t.48+32]
+                                          t.49 = call t.48(0)
+                                          aux01 = t.49
+                                          if t.49 goto :null67
+                                          Error("null pointer")
+                                          null67:
+                                          t.50 = [t.49]
+                                          t.50 = [t.50+24]
+                                          t.51 = call t.50(t.49)
+                                          var_end = t.51
+                                          if t.49 goto :null69
+                                          Error("null pointer")
+                                          null69:
+                                          t.52 = [t.49]
+                                          t.52 = [t.52+28]
+                                          t.53 = call t.52(t.49)
+                                          var_elem = t.53
+                                          goto :if59_end
+                                       if59_end:
+                                       ret int_ret_val
+
+                                    func List.GetEnd(this)
+                                       t.53 = end
+                                       ret t.53
+
+                                    func List.GetElem(this)
+                                       t.53 = elem
+                                       ret t.53
+
+                                    func List.GetNext(this)
+                                       t.53 = next
+                                       ret t.53
+
+                                    func List.Print(this)
+                                       aux01 = this
+                                       t.53 = end
+                                       var_end = t.53
+                                       t.53 = elem
+                                       var_elem = t.53
+                                       t.54 = Eq(var_end 0)
+                                       if0 t.54 goto :if71_else
+                                          t.53 = 0
+                                          goto :if71_end
+                                       if71_else:
+                                          t.53 = 1
+                                       if71_end:
+                                       t.54 = Eq(t.53 1)
+                                       if0 t.54 goto :if72_end
+                                          if 0 goto :null74
+                                          Error("null pointer")
+                                          null74:
+                                          t.55 = [0]
+                                          t.55 = [t.55+4]
+                                          t.56 = call t.55(0)
+                                          PrintIntS(t.56)
+                                          if t.47 goto :null76
+                                          Error("null pointer")
+                                          null76:
+                                          t.57 = [t.47]
+                                          t.57 = [t.57+32]
+                                          t.58 = call t.57(t.47)
+                                          aux01 = t.58
+                                          if t.58 goto :null78
+                                          Error("null pointer")
+                                          null78:
+                                          t.59 = [t.58]
+                                          t.59 = [t.59+24]
+                                          t.60 = call t.59(t.58)
+                                          var_end = t.60
+                                          if t.58 goto :null80
+                                          Error("null pointer")
+                                          null80:
+                                          t.61 = [t.58]
+                                          t.61 = [t.61+28]
+                                          t.62 = call t.61(t.58)
+                                          var_elem = t.62
+                                          goto :if72_end
+                                       if72_end:
+                                       ret 1
+
+                                    func LL.Start(this)
+                                       t.63 = HeapAllocZ(16)
+                                       [t.63] = :vmt_List
+                                       last_elem = t.63
+                                       if t.63 goto :null81
+                                       Error("null pointer")
+                                       null81:
+                                       t.64 = [t.63]
+                                       t.64 = [t.64+0]
+                                       t.65 = call t.64(t.63)
+                                       aux01 = t.65
+                                       head = last_elem
+                                       if t.56 goto :null82
+                                       Error("null pointer")
+                                       null82:
+                                       t.66 = [t.56]
+                                       t.66 = [t.66+0]
+                                       t.67 = call t.66(t.56)
+                                       aux01 = t.67
+                                       if t.56 goto :null83
+                                       Error("null pointer")
+                                       null83:
+                                       t.68 = [t.56]
+                                       t.68 = [t.68+36]
+                                       t.69 = call t.68(t.56)
+                                       aux01 = t.69
+                                       t.70 = HeapAllocZ(16)
+                                       [t.70] = :vmt_Element
+                                       el01 = t.70
+                                       if t.70 goto :null84
+                                       Error("null pointer")
+                                       null84:
+                                       t.71 = [t.70]
+                                       t.71 = [t.71+0]
+                                       t.72 = call t.71(t.70   25 37000 0)
+                                       aux01 = t.72
+                                       if t.56 goto :null85
+                                       Error("null pointer")
+                                       null85:
+                                       t.73 = [t.56]
+                                       t.73 = [t.73+8]
+                                       t.74 = call t.73(t.56 el01)
+                                       head = t.74
+                                       if t.74 goto :null86
+                                       Error("null pointer")
+                                       null86:
+                                       t.75 = [t.74]
+                                       t.75 = [t.75+36]
+                                       t.76 = call t.75(t.74)
+                                       aux01 = t.76
+                                       PrintIntS(10000000)
+                                       t.77 = HeapAllocZ(16)
+                                       [t.77] = :vmt_Element
+                                       el01 = t.77
+                                       if t.77 goto :null87
+                                       Error("null pointer")
+                                       null87:
+                                       t.78 = [t.77]
+                                       t.78 = [t.78+0]
+                                       t.79 = call t.78(t.77   39 42000 1)
+                                       aux01 = t.79
+                                       el02 = el01
+                                       if t.74 goto :null88
+                                       Error("null pointer")
+                                       null88:
+                                       t.80 = [t.74]
+                                       t.80 = [t.80+8]
+                                       t.81 = call t.80(t.74 el01)
+                                       head = t.81
+                                       if t.81 goto :null89
+                                       Error("null pointer")
+                                       null89:
+                                       t.82 = [t.81]
+                                       t.82 = [t.82+36]
+                                       t.83 = call t.82(t.81)
+                                       aux01 = t.83
+                                       PrintIntS(10000000)
+                                       t.84 = HeapAllocZ(16)
+                                       [t.84] = :vmt_Element
+                                       el01 = t.84
+                                       if t.84 goto :null90
+                                       Error("null pointer")
+                                       null90:
+                                       t.85 = [t.84]
+                                       t.85 = [t.85+0]
+                                       t.86 = call t.85(t.84   22 34000 0)
+                                       aux01 = t.86
+                                       if t.81 goto :null91
+                                       Error("null pointer")
+                                       null91:
+                                       t.87 = [t.81]
+                                       t.87 = [t.87+8]
+                                       t.88 = call t.87(t.81 el01)
+                                       head = t.88
+                                       if t.88 goto :null92
+                                       Error("null pointer")
+                                       null92:
+                                       t.89 = [t.88]
+                                       t.89 = [t.89+36]
+                                       t.90 = call t.89(t.88)
+                                       aux01 = t.90
+                                       t.91 = HeapAllocZ(16)
+                                       [t.91] = :vmt_Element
+                                       el03 = t.91
+                                       if t.91 goto :null93
+                                       Error("null pointer")
+                                       null93:
+                                       t.92 = [t.91]
+                                       t.92 = [t.92+0]
+                                       t.93 = call t.92(t.91   27 34000 0)
+                                       aux01 = t.93
+                                       if t.88 goto :null94
+                                       Error("null pointer")
+                                       null94:
+                                       t.94 = [t.88]
+                                       t.94 = [t.94+20]
+                                       t.95 = call t.94(t.88 el02)
+                                       PrintIntS(t.95)
+                                       if t.88 goto :null95
+                                       Error("null pointer")
+                                       null95:
+                                       t.96 = [t.88]
+                                       t.96 = [t.96+20]
+                                       t.97 = call t.96(t.88 el03)
+                                       PrintIntS(t.97)
+                                       PrintIntS(10000000)
+                                       t.98 = HeapAllocZ(16)
+                                       [t.98] = :vmt_Element
+                                       el01 = t.98
+                                       if t.98 goto :null96
+                                       Error("null pointer")
+                                       null96:
+                                       t.99 = [t.98]
+                                       t.99 = [t.99+0]
+                                       t.100 = call t.99(t.98   28 35000 0)
+                                       aux01 = t.100
+                                       if t.88 goto :null97
+                                       Error("null pointer")
+                                       null97:
+                                       t.101 = [t.88]
+                                       t.101 = [t.101+8]
+                                       t.102 = call t.101(t.88 el01)
+                                       head = t.102
+                                       if t.102 goto :null98
+                                       Error("null pointer")
+                                       null98:
+                                       t.103 = [t.102]
+                                       t.103 = [t.103+36]
+                                       t.104 = call t.103(t.102)
+                                       aux01 = t.104
+                                       PrintIntS(2220000)
+                                       if t.102 goto :null99
+                                       Error("null pointer")
+                                       null99:
+                                       t.105 = [t.102]
+                                       t.105 = [t.105+16]
+                                       t.106 = call t.105(t.102 el02)
+                                       head = t.106
+                                       if t.106 goto :null100
+                                       Error("null pointer")
+                                       null100:
+                                       t.107 = [t.106]
+                                       t.107 = [t.107+36]
+                                       t.108 = call t.107(t.106)
+                                       aux01 = t.108
+                                       PrintIntS(33300000)
+                                       if t.106 goto :null101
+                                       Error("null pointer")
+                                       null101:
+                                       t.109 = [t.106]
+                                       t.109 = [t.109+16]
+                                       t.110 = call t.109(t.106 el01)
+                                       head = t.110
+                                       if t.110 goto :null102
+                                       Error("null pointer")
+                                       null102:
+                                       t.111 = [t.110]
+                                       t.111 = [t.111+36]
+                                       t.112 = call t.111(t.110)
+                                       aux01 = t.112
+                                       PrintIntS(44440000)
+                                       ret 0
+

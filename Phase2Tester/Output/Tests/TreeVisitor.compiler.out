@@ -29,9 +29,9 @@
    func Main()
       t.0 = HeapAllocZ(4)
       [t.0] = :vmt_TV
-      if t.0 goto :null0
+      if t.0 goto :null1
       Error("null pointer")
-      null0:
+      null1:
       t.1 = [t.0]
       t.1 = [t.1+0]
       t.2 = call t.1(t.0)
@@ -42,145 +42,145 @@
       t.3 = HeapAllocZ(28)
       [t.3] = :vmt_Tree
       root = t.3
-      if root goto :null1
-      Error("null pointer")
-      null1:
-      t.4 = [root]
-      t.4 = [t.4+28]
-      t.5 = call t.4(this 16)
-      ntb = t.5
-      if root goto :null2
+      if t.3 goto :null2
       Error("null pointer")
       null2:
-      t.6 = [root]
-      t.6 = [t.6+100]
-      t.7 = call t.6(this)
-      ntb = t.7
-      PrintIntS(100000000)
-      if root goto :null3
+      t.4 = [t.3]
+      t.4 = [t.4+0]
+      t.5 = call t.4(t.3 16)
+      ntb = t.5
+      if t.3 goto :null3
       Error("null pointer")
       null3:
-      t.8 = [root]
-      t.8 = [t.8+76]
-      t.9 = call t.8(this 8)
-      ntb = t.9
-      if root goto :null4
+      t.6 = [t.3]
+      t.6 = [t.6+72]
+      t.7 = call t.6(t.3)
+      ntb = t.7
+      PrintIntS(100000000)
+      if t.3 goto :null4
       Error("null pointer")
       null4:
-      t.10 = [root]
-      t.10 = [t.10+76]
-      t.11 = call t.10(this 24)
-      ntb = t.11
-      if root goto :null5
+      t.8 = [t.3]
+      t.8 = [t.8+48]
+      t.9 = call t.8(t.3 8)
+      ntb = t.9
+      if t.3 goto :null5
       Error("null pointer")
       null5:
-      t.12 = [root]
-      t.12 = [t.12+76]
-      t.13 = call t.12(this 4)
-      ntb = t.13
-      if root goto :null6
+      t.10 = [t.3]
+      t.10 = [t.10+48]
+      t.11 = call t.10(t.3 24)
+      ntb = t.11
+      if t.3 goto :null6
       Error("null pointer")
       null6:
-      t.14 = [root]
-      t.14 = [t.14+76]
-      t.15 = call t.14(this 12)
-      ntb = t.15
-      if root goto :null7
+      t.12 = [t.3]
+      t.12 = [t.12+48]
+      t.13 = call t.12(t.3 4)
+      ntb = t.13
+      if t.3 goto :null7
       Error("null pointer")
       null7:
-      t.16 = [root]
-      t.16 = [t.16+76]
-      t.17 = call t.16(this 20)
-      ntb = t.17
-      if root goto :null8
+      t.14 = [t.3]
+      t.14 = [t.14+48]
+      t.15 = call t.14(t.3 12)
+      ntb = t.15
+      if t.3 goto :null8
       Error("null pointer")
       null8:
-      t.18 = [root]
-      t.18 = [t.18+76]
-      t.19 = call t.18(this 28)
-      ntb = t.19
-      if root goto :null9
+      t.16 = [t.3]
+      t.16 = [t.16+48]
+      t.17 = call t.16(t.3 20)
+      ntb = t.17
+      if t.3 goto :null9
       Error("null pointer")
       null9:
-      t.20 = [root]
-      t.20 = [t.20+76]
-      t.21 = call t.20(this 14)
-      ntb = t.21
-      if root goto :null10
+      t.18 = [t.3]
+      t.18 = [t.18+48]
+      t.19 = call t.18(t.3 28)
+      ntb = t.19
+      if t.3 goto :null10
       Error("null pointer")
       null10:
-      t.22 = [root]
-      t.22 = [t.22+100]
-      t.23 = call t.22(this)
+      t.20 = [t.3]
+      t.20 = [t.20+48]
+      t.21 = call t.20(t.3 14)
+      ntb = t.21
+      if t.3 goto :null11
+      Error("null pointer")
+      null11:
+      t.22 = [t.3]
+      t.22 = [t.22+72]
+      t.23 = call t.22(t.3)
       ntb = t.23
       PrintIntS(100000000)
       t.24 = HeapAllocZ(4)
       [t.24] = :vmt_MyVisitor
       v = t.24
       PrintIntS(50000000)
-      if root goto :null11
-      Error("null pointer")
-      null11:
-      t.25 = [root]
-      t.25 = [t.25+108]
-      t.26 = call t.25(this v)
-      nti = t.26
-      PrintIntS(100000000)
-      if root goto :null12
+      if t.3 goto :null12
       Error("null pointer")
       null12:
-      t.27 = [root]
-      t.27 = [t.27+96]
-      t.28 = call t.27(this 24)
-      PrintIntS(t.28)
-      if root goto :null13
+      t.25 = [t.3]
+      t.25 = [t.25+80]
+      t.26 = call t.25(t.3 v)
+      nti = t.26
+      PrintIntS(100000000)
+      if t.3 goto :null13
       Error("null pointer")
       null13:
-      t.29 = [root]
-      t.29 = [t.29+96]
-      t.30 = call t.29(this 12)
-      PrintIntS(t.30)
-      if root goto :null14
+      t.27 = [t.3]
+      t.27 = [t.27+68]
+      t.28 = call t.27(t.3 24)
+      PrintIntS(t.28)
+      if t.3 goto :null14
       Error("null pointer")
       null14:
-      t.31 = [root]
-      t.31 = [t.31+96]
-      t.32 = call t.31(this 16)
-      PrintIntS(t.32)
-      if root goto :null15
+      t.29 = [t.3]
+      t.29 = [t.29+68]
+      t.30 = call t.29(t.3 12)
+      PrintIntS(t.30)
+      if t.3 goto :null15
       Error("null pointer")
       null15:
-      t.33 = [root]
-      t.33 = [t.33+96]
-      t.34 = call t.33(this 50)
-      PrintIntS(t.34)
-      if root goto :null16
+      t.31 = [t.3]
+      t.31 = [t.31+68]
+      t.32 = call t.31(t.3 16)
+      PrintIntS(t.32)
+      if t.3 goto :null16
       Error("null pointer")
       null16:
-      t.35 = [root]
-      t.35 = [t.35+96]
-      t.36 = call t.35(this 12)
-      PrintIntS(t.36)
-      if root goto :null17
+      t.33 = [t.3]
+      t.33 = [t.33+68]
+      t.34 = call t.33(t.3 50)
+      PrintIntS(t.34)
+      if t.3 goto :null17
       Error("null pointer")
       null17:
-      t.37 = [root]
-      t.37 = [t.37+80]
-      t.38 = call t.37(this 12)
-      ntb = t.38
-      if root goto :null18
+      t.35 = [t.3]
+      t.35 = [t.35+68]
+      t.36 = call t.35(t.3 12)
+      PrintIntS(t.36)
+      if t.3 goto :null18
       Error("null pointer")
       null18:
-      t.39 = [root]
-      t.39 = [t.39+100]
-      t.40 = call t.39(this)
-      ntb = t.40
-      if root goto :null19
+      t.37 = [t.3]
+      t.37 = [t.37+52]
+      t.38 = call t.37(t.3 12)
+      ntb = t.38
+      if t.3 goto :null19
       Error("null pointer")
       null19:
-      t.41 = [root]
-      t.41 = [t.41+96]
-      t.42 = call t.41(this 12)
+      t.39 = [t.3]
+      t.39 = [t.39+72]
+      t.40 = call t.39(t.3)
+      ntb = t.40
+      if t.3 goto :null20
+      Error("null pointer")
+      null20:
+      t.41 = [t.3]
+      t.41 = [t.41+68]
+      t.42 = call t.41(t.3 12)
       PrintIntS(t.42)
       ret 0
 
@@ -252,124 +252,724 @@
       nti = t.43
       t.43 = LtS(num1 num2)
       t.43 = Eq(t.43 1)
-      if0 t.43 goto :if20_else
+      if0 t.43 goto :if21_else
          ntb = 0
-         goto :if20_end
-      if20_else:
-         t.44 = Eq(null 0)
-         if0 t.44 goto :if20_else
+         goto :if21_end
+      if21_else:
+         t.43 = LtS(num1 nti)
+         t.44 = Eq(t.43 0)
+         if0 t.44 goto :if23_else
             t.43 = 0
-            goto :if20_end
-         if20_else:
+            goto :if23_end
+         if23_else:
             t.43 = 1
-         if20_end:
+         if23_end:
          t.44 = Eq(t.43 1)
-         if0 t.44 goto :if21_else
+         if0 t.44 goto :if24_else
             ntb = 0
-            goto :if21_end
-         if21_else:
+            goto :if24_end
+         if24_else:
             ntb = 1
+            if24_end:
             if21_end:
-            if22_end:
             ret ntb
 
          func Tree.Insert(this v_key)
             t.45 = HeapAllocZ(28)
             [t.45] = :vmt_Tree
             new_node = t.45
-            if new_node goto :null23
+            if t.45 goto :null25
             Error("null pointer")
-            null23:
-            t.46 = [new_node]
-            t.46 = [t.46+28]
-            t.47 = call t.46(this v_key)
+            null25:
+            t.46 = [t.45]
+            t.46 = [t.46+0]
+            t.47 = call t.46(t.45 v_key)
             ntb = t.47
             current_node = this
             cont = 1
             t.47 = Eq(cont 1)
-            if0 t.47 goto :if24_end
-               if current_node goto :null24
+            if0 t.47 goto :if26_end
+               if t.36 goto :null28
                Error("null pointer")
-               null24:
-               t.48 = [current_node]
-               t.48 = [t.48+48]
-               t.49 = call t.48(this)
+               null28:
+               t.48 = [t.36]
+               t.48 = [t.48+20]
+               t.49 = call t.48(t.36)
                key_aux = t.49
                t.49 = LtS(v_key key_aux)
                t.49 = Eq(t.49 1)
-               if0 t.49 goto :if25_else
-                  if current_node goto :null25
+               if0 t.49 goto :if30_else
+                  if t.36 goto :null32
                   Error("null pointer")
-                  null25:
-                  t.50 = [current_node]
-                  t.50 = [t.50+60]
-                  t.51 = call t.50(this)
+                  null32:
+                  t.50 = [t.36]
+                  t.50 = [t.50+32]
+                  t.51 = call t.50(t.36)
                   t.51 = Eq(t.51 1)
-                  if0 t.51 goto :if26_else
-                     if current_node goto :null26
+                  if0 t.51 goto :if33_else
+                     if t.36 goto :null34
                      Error("null pointer")
-                     null26:
-                     t.52 = [current_node]
-                     t.52 = [t.52+44]
-                     t.53 = call t.52(this)
+                     null34:
+                     t.52 = [t.36]
+                     t.52 = [t.52+16]
+                     t.53 = call t.52(t.36)
                      current_node = t.53
-                     goto :if27_end
-                  if27_else:
+                     goto :if33_end
+                  if33_else:
                      cont = 0
-                     if current_node goto :null27
+                     if t.53 goto :null37
                      Error("null pointer")
-                     null27:
-                     t.54 = [current_node]
-                     t.54 = [t.54+64]
-                     t.55 = call t.54(this 1)
+                     null37:
+                     t.54 = [t.53]
+                     t.54 = [t.54+36]
+                     t.55 = call t.54(t.53 1)
                      ntb = t.55
-                     if current_node goto :null28
+                     if t.53 goto :null39
                      Error("null pointer")
-                     null28:
-                     t.56 = [current_node]
-                     t.56 = [t.56+36]
-                     t.57 = call t.56(this new_node)
+                     null39:
+                     t.56 = [t.53]
+                     t.56 = [t.56+8]
+                     t.57 = call t.56(t.53 new_node)
                      ntb = t.57
-                     if29_end:
+                     if33_end:
                      goto :if30_end
                   if30_else:
-                     if current_node goto :null30
+                     if t.53 goto :null41
                      Error("null pointer")
-                     null30:
-                     t.58 = [current_node]
-                     t.58 = [t.58+56]
-                     t.59 = call t.58(this)
+                     null41:
+                     t.58 = [t.53]
+                     t.58 = [t.58+28]
+                     t.59 = call t.58(t.53)
                      t.59 = Eq(t.59 1)
-                     if0 t.59 goto :if31_else
-                        if current_node goto :null31
+                     if0 t.59 goto :if42_else
+                        if t.53 goto :null43
                         Error("null pointer")
-                        null31:
-                        t.60 = [current_node]
-                        t.60 = [t.60+40]
-                        t.61 = call t.60(this)
+                        null43:
+                        t.60 = [t.53]
+                        t.60 = [t.60+12]
+                        t.61 = call t.60(t.53)
                         current_node = t.61
-                        goto :if32_end
-                     if32_else:
+                        goto :if42_end
+                     if42_else:
                         cont = 0
-                        if current_node goto :null32
+                        if t.61 goto :null46
                         Error("null pointer")
-                        null32:
-                        t.62 = [current_node]
-                        t.62 = [t.62+68]
-                        t.63 = call t.62(this 1)
+                        null46:
+                        t.62 = [t.61]
+                        t.62 = [t.62+40]
+                        t.63 = call t.62(t.61 1)
                         ntb = t.63
-                        if current_node goto :null33
+                        if t.61 goto :null48
                         Error("null pointer")
-                        null33:
-                        t.64 = [current_node]
-                        t.64 = [t.64+32]
-                        t.65 = call t.64(this new_node)
+                        null48:
+                        t.64 = [t.61]
+                        t.64 = [t.64+4]
+                        t.65 = call t.64(t.61 new_node)
                         ntb = t.65
-                        if34_end:
-                        if35_end:
-                        goto :if36_end
-                     if36_end:
+                        if42_end:
+                        if30_end:
+                        goto :if26_end
+                     if26_end:
                      ret 1
 
                   func Tree.Delete(this v_key)
                      current_node = this
+                     parent_node = this
+                     cont = 1
+                     found = 0
+                     is_root = 1
+                     t.65 = Eq(cont 1)
+                     if0 t.65 goto :if49_end
+                        if t.34 goto :null51
+                        Error("null pointer")
+                        null51:
+                        t.66 = [t.34]
+                        t.66 = [t.66+20]
+                        t.67 = call t.66(t.34)
+                        key_aux = t.67
+                        t.67 = LtS(v_key key_aux)
+                        t.67 = Eq(t.67 1)
+                        if0 t.67 goto :if53_else
+                           if t.34 goto :null54
+                           Error("null pointer")
+                           null54:
+                           t.68 = [t.34]
+                           t.68 = [t.68+32]
+                           t.69 = call t.68(t.34)
+                           t.69 = Eq(t.69 1)
+                           if0 t.69 goto :if55_else
+                              parent_node = current_node
+                              if t.34 goto :null58
+                              Error("null pointer")
+                              null58:
+                              t.70 = [t.34]
+                              t.70 = [t.70+16]
+                              t.71 = call t.70(t.34)
+                              current_node = t.71
+                              goto :if55_end
+                           if55_else:
+                              cont = 0
+                              if55_end:
+                              goto :if53_end
+                           if53_else:
+                              t.71 = LtS(key_aux v_key)
+                              t.71 = Eq(t.71 1)
+                              if0 t.71 goto :if59_else
+                                 if t.71 goto :null60
+                                 Error("null pointer")
+                                 null60:
+                                 t.72 = [t.71]
+                                 t.72 = [t.72+28]
+                                 t.73 = call t.72(t.71)
+                                 t.73 = Eq(t.73 1)
+                                 if0 t.73 goto :if61_else
+                                    parent_node = current_node
+                                    if t.71 goto :null64
+                                    Error("null pointer")
+                                    null64:
+                                    t.74 = [t.71]
+                                    t.74 = [t.74+12]
+                                    t.75 = call t.74(t.71)
+                                    current_node = t.75
+                                    goto :if61_end
+                                 if61_else:
+                                    cont = 0
+                                    if61_end:
+                                    goto :if59_end
+                                 if59_else:
+                                    t.75 = Eq(is_root 1)
+                                    if0 t.75 goto :if66_else
+                                       if t.75 goto :null67
+                                       Error("null pointer")
+                                       null67:
+                                       t.76 = [t.75]
+                                       t.76 = [t.76+28]
+                                       t.77 = call t.76(t.75)
+                                       t.78 = Eq(t.77 0)
+                                       if0 t.78 goto :if69_else
+                                          t.77 = 0
+                                          goto :if69_end
+                                       if69_else:
+                                          t.77 = 1
+                                       if69_end:
+                                       if t.75 goto :null70
+                                       Error("null pointer")
+                                       null70:
+                                       t.79 = [t.75]
+                                       t.79 = [t.79+32]
+                                       t.80 = call t.79(t.75)
+                                       t.81 = Eq(t.80 0)
+                                       if0 t.81 goto :if72_else
+                                          t.80 = 0
+                                          goto :if72_end
+                                       if72_else:
+                                          t.80 = 1
+                                       if72_end:
+                                       t.83 = Eq(t.77 0)
+                                       if0 t.83 goto :if73_else
+                                       t.82 = 0
+                                       t.83 = Eq(t.80 0)
+                                       if0 t.83 goto :if73_else
+                                       t.82 = 1
+                                       goto :if73_end
+                                       if73_else:
+                                          t.82 = 0
+                                       if73_end:
+                                       t.83 = Eq(t.82 1)
+                                       if0 t.83 goto :if74_else
+                                          ntb = 1
+                                          goto :if74_end
+                                       if74_else:
+                                          t.84 = [this]
+                                          t.84 = [t.84+56]
+                                          t.85 = call t.84(this  parent_node current_node)
+                                          ntb = t.85
+                                          if74_end:
+                                          goto :if66_end
+                                       if66_else:
+                                          t.86 = [this]
+                                          t.86 = [t.86+56]
+                                          t.87 = call t.86(this  parent_node current_node)
+                                          ntb = t.87
+                                          if66_end:
+                                          found = 1
+                                          cont = 0
+                                          if59_end:
+                                          if53_end:
+                                          is_root = 0
+                                          goto :if49_end
+                                       if49_end:
+                                       ret found
+
+                                    func Tree.Remove(this p_node c_node)
+                                       if c_node goto :null80
+                                       Error("null pointer")
+                                       null80:
+                                       t.88 = [c_node]
+                                       t.88 = [t.88+32]
+                                       t.89 = call t.88(c_node)
+                                       t.89 = Eq(t.89 1)
+                                       if0 t.89 goto :if81_else
+                                          t.90 = [this]
+                                          t.90 = [t.90+64]
+                                          t.91 = call t.90(this  p_node c_node)
+                                          ntb = t.91
+                                          goto :if81_end
+                                       if81_else:
+                                          if c_node goto :null83
+                                          Error("null pointer")
+                                          null83:
+                                          t.92 = [c_node]
+                                          t.92 = [t.92+28]
+                                          t.93 = call t.92(c_node)
+                                          t.93 = Eq(t.93 1)
+                                          if0 t.93 goto :if84_else
+                                             t.94 = [this]
+                                             t.94 = [t.94+60]
+                                             t.95 = call t.94(this  p_node c_node)
+                                             ntb = t.95
+                                             goto :if84_end
+                                          if84_else:
+                                             if c_node goto :null87
+                                             Error("null pointer")
+                                             null87:
+                                             t.96 = [c_node]
+                                             t.96 = [t.96+20]
+                                             t.97 = call t.96(c_node)
+                                             auxkey1 = t.97
+                                             if p_node goto :null89
+                                             Error("null pointer")
+                                             null89:
+                                             t.98 = [p_node]
+                                             t.98 = [t.98+16]
+                                             t.99 = call t.98(p_node)
+                                             if t.99 goto :null90
+                                             Error("null pointer")
+                                             null90:
+                                             t.100 = [t.99]
+                                             t.100 = [t.100+20]
+                                             t.101 = call t.100(t.99)
+                                             auxkey2 = t.101
+                                             t.102 = [this]
+                                             t.102 = [t.102+44]
+                                             t.103 = call t.102(this  auxkey1 auxkey2)
+                                             t.103 = Eq(t.103 1)
+                                             if0 t.103 goto :if93_else
+                                                if p_node goto :null95
+                                                Error("null pointer")
+                                                null95:
+                                                t.104 = [p_node]
+                                                t.104 = [t.104+8]
+                                                t.105 = my_null
+                                                t.105 = call t.104(p_node t.105)
+                                                ntb = t.105
+                                                if p_node goto :null97
+                                                Error("null pointer")
+                                                null97:
+                                                t.106 = [p_node]
+                                                t.106 = [t.106+36]
+                                                t.107 = call t.106(p_node 0)
+                                                ntb = t.107
+                                                goto :if93_end
+                                             if93_else:
+                                                if p_node goto :null99
+                                                Error("null pointer")
+                                                null99:
+                                                t.108 = [p_node]
+                                                t.108 = [t.108+4]
+                                                t.109 = my_null
+                                                t.109 = call t.108(p_node t.109)
+                                                ntb = t.109
+                                                if p_node goto :null101
+                                                Error("null pointer")
+                                                null101:
+                                                t.110 = [p_node]
+                                                t.110 = [t.110+40]
+                                                t.111 = call t.110(p_node 0)
+                                                ntb = t.111
+                                                if93_end:
+                                                if84_end:
+                                                if81_end:
+                                                ret 1
+
+                                             func Tree.RemoveRight(this p_node c_node)
+                                                if c_node goto :null102
+                                                Error("null pointer")
+                                                null102:
+                                                t.112 = [c_node]
+                                                t.112 = [t.112+28]
+                                                t.113 = call t.112(c_node)
+                                                t.113 = Eq(t.113 1)
+                                                if0 t.113 goto :if103_end
+                                                   if c_node goto :null105
+                                                   Error("null pointer")
+                                                   null105:
+                                                   t.114 = [c_node]
+                                                   t.114 = [t.114+24]
+                                                   if c_node goto :null106
+                                                   Error("null pointer")
+                                                   null106:
+                                                   t.116 = [c_node]
+                                                   t.116 = [t.116+12]
+                                                   t.117 = call t.116(c_node)
+                                                   if t.117 goto :null107
+                                                   Error("null pointer")
+                                                   null107:
+                                                   t.118 = [t.117]
+                                                   t.118 = [t.118+20]
+                                                   t.119 = call t.118(t.117)
+                                                   t.119 = call t.114(c_node t.119)
+                                                   ntb = t.119
+                                                   p_node = c_node
+                                                   if c_node goto :null110
+                                                   Error("null pointer")
+                                                   null110:
+                                                   t.120 = [c_node]
+                                                   t.120 = [t.120+12]
+                                                   t.121 = call t.120(c_node)
+                                                   c_node = t.121
+                                                   goto :if103_end
+                                                if103_end:
+                                                if t.119 goto :null111
+                                                Error("null pointer")
+                                                null111:
+                                                t.122 = [t.119]
+                                                t.122 = [t.122+4]
+                                                t.123 = my_null
+                                                t.123 = call t.122(t.119 t.123)
+                                                ntb = t.123
+                                                if t.119 goto :null112
+                                                Error("null pointer")
+                                                null112:
+                                                t.124 = [t.119]
+                                                t.124 = [t.124+40]
+                                                t.125 = call t.124(t.119 0)
+                                                ntb = t.125
+                                                ret 1
+
+                                             func Tree.RemoveLeft(this p_node c_node)
+                                                if t.121 goto :null113
+                                                Error("null pointer")
+                                                null113:
+                                                t.126 = [t.121]
+                                                t.126 = [t.126+32]
+                                                t.127 = call t.126(t.121)
+                                                t.127 = Eq(t.127 1)
+                                                if0 t.127 goto :if114_end
+                                                   if t.121 goto :null116
+                                                   Error("null pointer")
+                                                   null116:
+                                                   t.128 = [t.121]
+                                                   t.128 = [t.128+24]
+                                                   if t.121 goto :null117
+                                                   Error("null pointer")
+                                                   null117:
+                                                   t.130 = [t.121]
+                                                   t.130 = [t.130+16]
+                                                   t.131 = call t.130(t.121)
+                                                   if t.131 goto :null118
+                                                   Error("null pointer")
+                                                   null118:
+                                                   t.132 = [t.131]
+                                                   t.132 = [t.132+20]
+                                                   t.133 = call t.132(t.131)
+                                                   t.133 = call t.128(t.121 t.133)
+                                                   ntb = t.133
+                                                   p_node = c_node
+                                                   if t.121 goto :null121
+                                                   Error("null pointer")
+                                                   null121:
+                                                   t.134 = [t.121]
+                                                   t.134 = [t.134+16]
+                                                   t.135 = call t.134(t.121)
+                                                   c_node = t.135
+                                                   goto :if114_end
+                                                if114_end:
+                                                if t.133 goto :null122
+                                                Error("null pointer")
+                                                null122:
+                                                t.136 = [t.133]
+                                                t.136 = [t.136+8]
+                                                t.137 = my_null
+                                                t.137 = call t.136(t.133 t.137)
+                                                ntb = t.137
+                                                if t.133 goto :null123
+                                                Error("null pointer")
+                                                null123:
+                                                t.138 = [t.133]
+                                                t.138 = [t.138+36]
+                                                t.139 = call t.138(t.133 0)
+                                                ntb = t.139
+                                                ret 1
+
+                                             func Tree.Search(this v_key)
+                                                current_node = this
+                                                cont = 1
+                                                ifound = 0
+                                                t.139 = Eq(cont 1)
+                                                if0 t.139 goto :if124_end
+                                                   if t.131 goto :null126
+                                                   Error("null pointer")
+                                                   null126:
+                                                   t.140 = [t.131]
+                                                   t.140 = [t.140+20]
+                                                   t.141 = call t.140(t.131)
+                                                   key_aux = t.141
+                                                   t.141 = LtS(v_key key_aux)
+                                                   t.141 = Eq(t.141 1)
+                                                   if0 t.141 goto :if128_else
+                                                      if t.131 goto :null129
+                                                      Error("null pointer")
+                                                      null129:
+                                                      t.142 = [t.131]
+                                                      t.142 = [t.142+32]
+                                                      t.143 = call t.142(t.131)
+                                                      t.143 = Eq(t.143 1)
+                                                      if0 t.143 goto :if130_else
+                                                         if t.131 goto :null131
+                                                         Error("null pointer")
+                                                         null131:
+                                                         t.144 = [t.131]
+                                                         t.144 = [t.144+16]
+                                                         t.145 = call t.144(t.131)
+                                                         current_node = t.145
+                                                         goto :if130_end
+                                                      if130_else:
+                                                         cont = 0
+                                                         if130_end:
+                                                         goto :if128_end
+                                                      if128_else:
+                                                         t.145 = LtS(key_aux v_key)
+                                                         t.145 = Eq(t.145 1)
+                                                         if0 t.145 goto :if132_else
+                                                            if t.145 goto :null133
+                                                            Error("null pointer")
+                                                            null133:
+                                                            t.146 = [t.145]
+                                                            t.146 = [t.146+28]
+                                                            t.147 = call t.146(t.145)
+                                                            t.147 = Eq(t.147 1)
+                                                            if0 t.147 goto :if134_else
+                                                               if t.145 goto :null135
+                                                               Error("null pointer")
+                                                               null135:
+                                                               t.148 = [t.145]
+                                                               t.148 = [t.148+12]
+                                                               t.149 = call t.148(t.145)
+                                                               current_node = t.149
+                                                               goto :if134_end
+                                                            if134_else:
+                                                               cont = 0
+                                                               if134_end:
+                                                               goto :if132_end
+                                                            if132_else:
+                                                               ifound = 1
+                                                               cont = 0
+                                                               if132_end:
+                                                               if128_end:
+                                                               goto :if124_end
+                                                            if124_end:
+                                                            ret ifound
+
+                                                         func Tree.Print(this)
+                                                            current_node = this
+                                                            t.150 = [this]
+                                                            t.150 = [t.150+76]
+                                                            t.151 = call t.150(this current_node)
+                                                            ntb = t.151
+                                                            ret 1
+
+                                                         func Tree.RecPrint(this node)
+                                                            if node goto :null139
+                                                            Error("null pointer")
+                                                            null139:
+                                                            t.152 = [node]
+                                                            t.152 = [t.152+32]
+                                                            t.153 = call t.152(node)
+                                                            t.153 = Eq(t.153 1)
+                                                            if0 t.153 goto :if140_else
+                                                               t.154 = [this]
+                                                               t.154 = [t.154+76]
+                                                               if node goto :null143
+                                                               Error("null pointer")
+                                                               null143:
+                                                               t.156 = [node]
+                                                               t.156 = [t.156+16]
+                                                               t.157 = call t.156(node)
+                                                               t.157 = call t.154(this t.157)
+                                                               ntb = t.157
+                                                               goto :if140_end
+                                                            if140_else:
+                                                               ntb = 1
+                                                               if140_end:
+                                                               if node goto :null144
+                                                               Error("null pointer")
+                                                               null144:
+                                                               t.158 = [node]
+                                                               t.158 = [t.158+20]
+                                                               t.159 = call t.158(node)
+                                                               PrintIntS(t.159)
+                                                               if node goto :null145
+                                                               Error("null pointer")
+                                                               null145:
+                                                               t.160 = [node]
+                                                               t.160 = [t.160+28]
+                                                               t.161 = call t.160(node)
+                                                               t.161 = Eq(t.161 1)
+                                                               if0 t.161 goto :if146_else
+                                                                  t.162 = [this]
+                                                                  t.162 = [t.162+76]
+                                                                  if node goto :null149
+                                                                  Error("null pointer")
+                                                                  null149:
+                                                                  t.164 = [node]
+                                                                  t.164 = [t.164+12]
+                                                                  t.165 = call t.164(node)
+                                                                  t.165 = call t.162(this t.165)
+                                                                  ntb = t.165
+                                                                  goto :if146_end
+                                                               if146_else:
+                                                                  ntb = 1
+                                                                  if146_end:
+                                                                  ret 1
+
+                                                               func Tree.accept(this v)
+                                                                  PrintIntS(333)
+                                                                  if t.24 goto :null150
+                                                                  Error("null pointer")
+                                                                  null150:
+                                                                  t.166 = [t.24]
+                                                                  t.166 = [t.166+0]
+                                                                  t.167 = call t.166(t.24 this)
+                                                                  nti = t.167
+                                                                  ret 0
+
+                                                               func Visitor.visit(this n)
+                                                                  if n goto :null151
+                                                                  Error("null pointer")
+                                                                  null151:
+                                                                  t.168 = [n]
+                                                                  t.168 = [t.168+28]
+                                                                  t.169 = call t.168(n)
+                                                                  t.169 = Eq(t.169 1)
+                                                                  if0 t.169 goto :if152_else
+                                                                     t.169 = [this]
+                                                                     t.169 = [t.169 + 36]
+                                                                     if n goto :null154
+                                                                     Error("null pointer")
+                                                                     null154:
+                                                                     t.170 = [n]
+                                                                     t.170 = [t.170+12]
+                                                                     t.171 = call t.170(n)
+                                                                     t.169 = t.171
+                                                                     t.171 = r
+                                                                     if t.171 goto :null156
+                                                                     Error("null pointer")
+                                                                     null156:
+                                                                     t.172 = [t.171]
+                                                                     t.172 = [t.172+80]
+                                                                     t.173 = call t.172(t.171 this)
+                                                                     nti = t.173
+                                                                     goto :if152_end
+                                                                  if152_else:
+                                                                     nti = 0
+                                                                     if152_end:
+                                                                     if n goto :null157
+                                                                     Error("null pointer")
+                                                                     null157:
+                                                                     t.174 = [n]
+                                                                     t.174 = [t.174+32]
+                                                                     t.175 = call t.174(n)
+                                                                     t.175 = Eq(t.175 1)
+                                                                     if0 t.175 goto :if158_else
+                                                                        t.175 = [this]
+                                                                        t.175 = [t.175 + 32]
+                                                                        if n goto :null160
+                                                                        Error("null pointer")
+                                                                        null160:
+                                                                        t.176 = [n]
+                                                                        t.176 = [t.176+16]
+                                                                        t.177 = call t.176(n)
+                                                                        t.175 = t.177
+                                                                        t.177 = l
+                                                                        if t.177 goto :null162
+                                                                        Error("null pointer")
+                                                                        null162:
+                                                                        t.178 = [t.177]
+                                                                        t.178 = [t.178+80]
+                                                                        t.179 = call t.178(t.177 this)
+                                                                        nti = t.179
+                                                                        goto :if158_end
+                                                                     if158_else:
+                                                                        nti = 0
+                                                                        if158_end:
+                                                                        ret 0
+
+                                                                     func Visitor.visit(this n)
+                                                                        if n goto :null163
+                                                                        Error("null pointer")
+                                                                        null163:
+                                                                        t.180 = [n]
+                                                                        t.180 = [t.180+28]
+                                                                        t.181 = call t.180(n)
+                                                                        t.181 = Eq(t.181 1)
+                                                                        if0 t.181 goto :if164_else
+                                                                           t.181 = [this]
+                                                                           t.181 = [t.181 + 36]
+                                                                           if n goto :null166
+                                                                           Error("null pointer")
+                                                                           null166:
+                                                                           t.182 = [n]
+                                                                           t.182 = [t.182+12]
+                                                                           t.183 = call t.182(n)
+                                                                           t.181 = t.183
+                                                                           t.183 = r
+                                                                           if t.183 goto :null168
+                                                                           Error("null pointer")
+                                                                           null168:
+                                                                           t.184 = [t.183]
+                                                                           t.184 = [t.184+80]
+                                                                           t.185 = call t.184(t.183 this)
+                                                                           nti = t.185
+                                                                           goto :if164_end
+                                                                        if164_else:
+                                                                           nti = 0
+                                                                           if164_end:
+                                                                           if n goto :null169
+                                                                           Error("null pointer")
+                                                                           null169:
+                                                                           t.186 = [n]
+                                                                           t.186 = [t.186+20]
+                                                                           t.187 = call t.186(n)
+                                                                           PrintIntS(t.187)
+                                                                           if n goto :null170
+                                                                           Error("null pointer")
+                                                                           null170:
+                                                                           t.188 = [n]
+                                                                           t.188 = [t.188+32]
+                                                                           t.189 = call t.188(n)
+                                                                           t.189 = Eq(t.189 1)
+                                                                           if0 t.189 goto :if171_else
+                                                                              t.189 = [this]
+                                                                              t.189 = [t.189 + 32]
+                                                                              if n goto :null173
+                                                                              Error("null pointer")
+                                                                              null173:
+                                                                              t.190 = [n]
+                                                                              t.190 = [t.190+16]
+                                                                              t.191 = call t.190(n)
+                                                                              t.189 = t.191
+                                                                              t.191 = l
+                                                                              if t.191 goto :null175
+                                                                              Error("null pointer")
+                                                                              null175:
+                                                                              t.192 = [t.191]
+                                                                              t.192 = [t.192+80]
+                                                                              t.193 = call t.192(t.191 this)
+                                                                              nti = t.193
+                                                                              goto :if171_end
+                                                                           if171_else:
+                                                                              nti = 0
+                                                                              if171_end:
+                                                                              ret 0
+
